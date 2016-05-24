@@ -1,4 +1,5 @@
 package treesandmore;
+import java.util.*;
 
 public class Node {
     int data;
@@ -43,6 +44,23 @@ class BinarySearchTree{
                     }
                 }
             }
+        }
+    }
+   
+    
+    public int height(Node root) {
+        if (root != null) {
+            int lDepth = height(root.left);
+            int rDepth = height(root.right);
+            if (lDepth >= rDepth) {
+                System.out.println(root.data + "------" + " | ldepth" + (lDepth+1) + '\n');
+                return lDepth+1;
+            } else {
+                System.out.println(root.data + "------" + " | rdepth" + (rDepth+1) + '\n');
+                return rDepth+1;
+            }
+        } else {
+            return 0;
         }
     }
     
@@ -121,6 +139,25 @@ class BinarySearchTree{
         }
     }
     
+    public void inorderTraversalNoRecursion(Node root) {
+        if (root == null) {
+            return;
+        } else {
+            Node temp = root;
+            Deque<Node> q = new LinkedList<Node>();
+            while(!q.isEmpty() || temp != null) {
+                if (temp != null) {
+                   q.push(temp);
+                   temp = temp.left;
+                } else {
+                    temp = q.pop();
+                    System.out.print(temp.data + " , ");
+                    temp = temp.right;
+                }
+            }
+        }
+    }
+    
     public void postorderTraversal(Node root) {
         if (root!=null) {
             postorderTraversal(root.right);
@@ -129,13 +166,64 @@ class BinarySearchTree{
         }
     }
     
+    public void levelOrderTraversal(Node root) {
+        if (root == null) {
+            return;
+        } else {
+            Queue<Node> q = new LinkedList<Node>();
+            Node temp;
+            q.add(root);
+            while(!q.isEmpty()){
+                temp = q.poll();
+                System.out.print(temp.data + " , ");
+                if (temp.left != null) {
+                    q.add(temp.left);
+                }
+                if (temp.right != null) {
+                    q.add(temp.right);
+                }
+            }
+        }
+    }
+    
+    public void spiralOrderTraversal(Node root) {
+        if (root == null) {
+            return;
+        } else {
+            Queue<Node> q = new LinkedList<Node>();
+            int counter = 0;
+            Node temp;
+            q.add(root);
+            while(!q.isEmpty()){
+                temp = q.poll();
+                System.out.print(temp.data + " , ");
+                if (counter % 2 == 0 ) {
+                    if (temp.left != null) {
+                        q.add(temp.left);
+                    }
+                    if (temp.right != null) {
+                        q.add(temp.right);
+                    }
+                } else {
+                    if (temp.right != null) {
+                        q.add(temp.right);
+                    }
+                    if (temp.left != null) {
+                        q.add(temp.left);
+                    }
+                }
+                counter++;
+            }
+        }
+    }
+    
     public static void main(String args[]) {
         BinarySearchTree b = new BinarySearchTree();
-        b.insert(100);
-        b.insert(81);
-        b.insert(1200);
-        b.insert(1400);
-        System.out.println("\n----------Preorder Traversal-------------");
+        b.insert(2);
+        b.insert(1);
+        b.insert(4);
+        b.insert(5);
+        System.out.println("\n----------Preorder Traversal------------");
         b.preorderTraversal(root);
         System.out.println("\n----------InOrder Traversal-------------");
         b.inorderTraversal(root);
@@ -146,9 +234,20 @@ class BinarySearchTree{
             System.out.println("\n----------Find a node-------------" + findNode.data);
         else
             System.out.println("\n----------Find a node - No Result found-------------");
-       b.delete(root, 1200);
+       b.delete(root, 4);
        System.out.println("\n----------Preorder Traversal after deletion-------------");
        b.preorderTraversal(root);
-        
+       System.out.println("\n----------Height of BST-------------");
+       System.out.println(b.height(root));
+       b.insert(4);
+       b.insert(3);
+       System.out.println("\n----------LevelOrder traversal of BST-------------");
+       b.levelOrderTraversal(root);
+       System.out.println("\n----------Spiral traversal of BST-------------");
+       b.spiralOrderTraversal(root);
+       System.out.println("\n----------InOrder Traversal-------------");
+       b.inorderTraversal(root);
+       System.out.println("\n----------InOrder Traversal No recurrsion-------------");
+       b.inorderTraversalNoRecursion(root);
     }
 }
