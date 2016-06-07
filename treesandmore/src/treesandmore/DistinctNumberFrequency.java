@@ -2,7 +2,7 @@ package treesandmore;
 // Count frequencies of all elements in array in O(1) extra space and O(n) time
 public class DistinctNumberFrequency {
     public static void main(String args[]){
-        int[] a = {0, 3, 3, 3, 2, 4};
+        int[] a = {0, 3, 3, 1, 2, 4};
         int temp;
         for (int i=1; i<a.length; i++) {
             // process and swap number
