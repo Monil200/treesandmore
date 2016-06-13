@@ -21,7 +21,8 @@ public class BulbSwitcher {
          * 1, 1, 1, ,1 ,1 - round 1
          * 1 ,-1, 1, -1, 1 - round 2
          * 1, -1, -1, -1, 1 - round 3
-         */ 
+         */        
+        
 
     }
     
