@@ -1,7 +1,7 @@
 package treesandmore;
 import java.util.*;
 
-public class Node {
+class Node {
     int data;
     Node left;
     Node right;
@@ -12,7 +12,7 @@ public class Node {
     }
 }
 
-class BinarySearchTree{
+public class BinarySearchTree{
     public static Node root;
     public BinarySearchTree() {
         this.root = null;
@@ -123,19 +123,19 @@ class BinarySearchTree{
         return null;
     }
     
-    public void preorderTraversal(Node root) {
+    public void inorderTraversal(Node root) {
         if (root!=null) {
-            preorderTraversal(root.left);
+            inorderTraversal(root.left);
             System.out.print(root.data + " | ");
-            preorderTraversal(root.right);
+            inorderTraversal(root.right);
         }
     }
     
-    public void inorderTraversal(Node root) {
+    public void preorderTraversal(Node root) {
         if (root!=null) {
             System.out.print(root.data + " | ");
-            inorderTraversal(root.left);
-            inorderTraversal(root.right);
+            preorderTraversal(root.left);
+            preorderTraversal(root.right);
         }
     }
     
@@ -158,10 +158,81 @@ class BinarySearchTree{
         }
     }
     
+    public void recursionInorder(Node root) {
+        if (root == null) {
+            return;
+        } else {
+            Node temp = root;
+            Deque<Node> dqu = new LinkedList<Node>();
+            while(!dqu.isEmpty() || temp!=null) {
+                if (temp !=null) {
+                   dqu.push(temp);
+                   temp = temp.left;
+                } else {
+                    temp = dqu.pop();
+                    System.out.print(temp.data + ",");
+                    temp = temp.right;
+                }
+            }
+        }
+    }
+    
+    public void recursionPreorder(Node root) {
+        if (root == null) {
+            return;
+        } else {
+            Node temp = root;
+            Deque<Node> dqu = new LinkedList<Node>();
+            while(!dqu.isEmpty() || temp!=null) {
+                if (temp!=null) {
+                    System.out.print(temp.data + ",");
+                    if (temp.right!=null) {
+                        dqu.push(temp.right);
+                    }
+                    temp = temp.left;
+                } else {
+                    temp = dqu.pop();
+                }
+            }
+        }
+    }
+    
+    /*
+     * NOte post order is reverse of a variation of preorder
+     * ie. instead of root-left-right its REVERSE of root-right-left
+     *    2
+     * 1    3
+     * 
+     *  1-2-3 inorder
+     *  2-1-3 preorder
+     *  1-3-2 post order
+     *  2-3-1 preorder variation i.e. root-right-left instead of root-left-right
+     *  1-3-2 reverse of preorder variation = post order
+     */
+    public void recursionPostorder(Node root) { 
+        if (root == null) {
+            return;
+        } else {
+            Node temp = root;
+            Deque<Node> dqu = new LinkedList<Node>();
+            while(!dqu.isEmpty() || temp!=null) {
+                if (temp!=null) {
+                    System.out.print(temp.data + ",");
+                    if (temp.left!=null) {
+                        dqu.push(temp.left);
+                    }
+                    temp = temp.right;
+                } else {
+                    temp = dqu.pop();
+                }
+            }
+        }
+    }
+    
     public void postorderTraversal(Node root) {
         if (root!=null) {
-            postorderTraversal(root.right);
             postorderTraversal(root.left);
+            postorderTraversal(root.right);
             System.out.print(root.data + " | ");
         }
     }
@@ -249,5 +320,11 @@ class BinarySearchTree{
        b.inorderTraversal(root);
        System.out.println("\n----------InOrder Traversal No recurrsion-------------");
        b.inorderTraversalNoRecursion(root);
+       System.out.println("\n----------InOrder Traversal No recurrsion practise-------------");
+       b.recursionInorder(root);
+       System.out.println("\n----------PreOrder Traversal No recurrsion practise-------------");
+       b.recursionPreorder(root);
+       System.out.println("\n----------PostOrder Traversal No recurrsion practise, answer id reverse of this output-------------");
+       b.recursionPostorder(root);
     }
 }
