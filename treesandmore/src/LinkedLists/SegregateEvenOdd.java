@@ -46,7 +46,7 @@ public class SegregateEvenOdd {
                     findeven.data = temp;
                     findodd = findodd.next;
                     findeven = findeven.next;
-                    System.out.println("Traversal after 1 loop");
+                    System.out.println("Traversal after  one loop");
                     traversal(head);
                 }
             }
