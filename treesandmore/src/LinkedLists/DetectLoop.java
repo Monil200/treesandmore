@@ -32,7 +32,7 @@ public class DetectLoop {
             Node fast = head.next;
             Node slow = head;
             int counter = 0;
-            while (slow != fast) {
+            while (slow != fast) { // this is for detecting loop
                 counter++;
                 if (counter%2 == 0) {
                     slow = slow.next;
@@ -43,6 +43,30 @@ public class DetectLoop {
                     break;
                 }
             }
+            Node slowCopy = slow;
+            slow = slow.next;
+            counter=0;
+            while(slow!=slowCopy) { // this is the number of nodes in loop
+                counter++;
+                slow = slow.next;
+            }
+            System.out.println("Number of nodes in loop:" + ++counter);
+            Node near = head;
+            Node far = head;
+            Node prev = null;
+            int counterToReach = 0;
+            while(counterToReach != counter) {
+                counterToReach++;
+                prev = far;
+                far = far.next;
+            }
+            System.out.println("Near:" + near.data + " far:" + far.data + " prev:" + prev.data);
+            while(far !=near) {
+                prev = far;
+                far = far.next;
+                near = near.next;
+            }
+            prev.next = null;
         }
     }
     public static void main(String[] args) {
@@ -58,6 +82,8 @@ public class DetectLoop {
         temp.next = head;
 //        l.traversal(head);
         l.detectLoop(head);
+        System.out.println("Traversal after detecting and removing loop");
+        l.traversal(head);
     }
 
 }

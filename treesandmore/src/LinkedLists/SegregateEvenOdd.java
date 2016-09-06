@@ -24,11 +24,13 @@ public class SegregateEvenOdd {
             }
         }
     }
+    
+    // since odd nodes which are moved to end of the list are not in the same order as they appear in original list,
+    // we can craete new list just for odd nodes and append even nodes list to odd nodes list
     public void sagregateEvenOdd() {
         if (head == null || head.next==null) {
             return;
         } else {
-            Node current = head;
             Node findeven = head;
             Node findodd = head;
             int temp;
