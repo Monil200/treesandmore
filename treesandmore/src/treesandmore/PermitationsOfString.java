@@ -39,10 +39,48 @@ public class PermitationsOfString {
         }
     }
     
+    public static void permuteWildString(String str, int s) {
+        if (s == str.length()) {
+            System.out.println(str);
+        } else {
+            String wildStrCopy;
+            for(int i=s;i<str.length();i++) {
+                if (str.charAt(i) == '?') {
+//                   System.out.println("i:" + i + " char:" + str.charAt(i));
+                   char temp[] = str.toCharArray();
+                   temp[i] = '1';
+                   wildStrCopy = String.valueOf(temp);
+                   temp[i] = '0';
+                   str = String.valueOf(temp);
+                   permuteWildString(wildStrCopy, i+1);
+                   permuteWildString(str, i+1);
+                }
+            }
+        }
+    }
+    
+    // t9 dictionary implementation.
+    public static Map<Integer, String> dict = new HashMap<Integer, String>();
+    public static void t9Permutations(String[] output, int[] keys, int currentDigit) {
+        if (currentDigit == keys.length) {
+            System.out.println(Arrays.toString(output));
+        } else {
+            for(int i=0;i<dict.get(keys[currentDigit]).length();i++) {
+                output[currentDigit] = dict.get(keys[currentDigit]).charAt(i) + "";
+                t9Permutations(output, keys, currentDigit+1);
+            }
+        }
+    }
+    
+    
     public static void main(String args[]) {
+        
+        // program to get all permutations of a string
+        // ABC ACB BAC BCA CBA CAB
         String str = "ABC";
         permuteString(str, 0, str.length());
-        // ABC ACB BAC BCA CBA CAB
+        
+        // program to get all combinations of sentences from words in an array.
         String a[][]  = {
             {"you"},
             {"have"},
@@ -56,8 +94,25 @@ public class PermitationsOfString {
             }
         }
         permuteArray(flattenedA, 0 , flattenedA.size());
-//        String[] temp = new String[flattenedA.size()];
-//        temp = flattenedA.toArray(temp);
-//        System.out.println(Arrays.toString(temp));
+        
+        // A wildcard char '?' can be '0' or '1'.
+        // generate all possible combinations of a string.
+        String wildStr = "000?";
+        permuteWildString(wildStr, 0);
+        
+        // t9 dictionary.
+        dict.put(2, "abc");
+        dict.put(3, "def");
+        dict.put(4, "ghi");
+        dict.put(5, "jkl");
+        dict.put(6, "mno");
+        dict.put(7, "pqrs");
+        dict.put(8, "tuv");
+        dict.put(9, "wxyz");
+        int strokes[] = {2,3,4};
+        String temp[] = new String[strokes.length];
+        t9Permutations(temp, strokes, 0);
     }
+    
+    
 }
