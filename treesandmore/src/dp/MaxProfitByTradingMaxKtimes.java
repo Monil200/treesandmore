@@ -16,7 +16,6 @@ public class MaxProfitByTradingMaxKtimes {
         for(int i=0;i<=k;i++) {
             opt[i][0] = 0; // no profit can be done with just 1 trade. 10-10 = 0 profit
         }
-        int maxSoFar = -1;
         int noTrade;
         for(int i=1;i<=k;i++) {
             for(int j=1;j<price.length;j++) {
@@ -32,7 +31,6 @@ public class MaxProfitByTradingMaxKtimes {
                     opt[i][j] = Math.max(noTrade, previousDayMax + profit);
                 }
             }
-            maxSoFar = -1;
         }
         
         for(int i=0;i<opt.length;i++) {
