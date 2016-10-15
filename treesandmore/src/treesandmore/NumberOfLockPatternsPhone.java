@@ -30,7 +30,6 @@ public class NumberOfLockPatternsPhone {
         findNumberOfLockPatterns(x+1,y+1,keypad,visited,num,count);
         findNumberOfLockPatterns(x,y+1,keypad,visited,num,count);
         findNumberOfLockPatterns(x-1,y+1,keypad,visited,num,count);
-//        patternsTillNow = 0;
         visited[x][y] = 0; // backtrack
         count=0;
         

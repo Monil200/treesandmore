@@ -3,9 +3,7 @@ package treesandmore;
 import java.util.Arrays;
 public class MaxProductSubarray {
     
-    
-    
-    
+
     public static int getMax(int a, int b,int c) {
         return Math.max(Math.max(a, b), c);
     }
