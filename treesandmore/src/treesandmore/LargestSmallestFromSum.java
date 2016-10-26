@@ -12,33 +12,27 @@ public class LargestSmallestFromSum {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        int s= 45, d =5;
+        int s= 18, d =5;
         String digit = "";
-        digit += "1";
-        s -=1;
-        d -=1;
-        int remainder;
         while(s > 0 && d > 0) {
             if (s>9) {
-                s -= 9;
+                digit+="9";
+                s-=9;
                 d--;
-                digit += "9";
             } else {
-                digit += (Integer.toString(s));
-                s -= s;
+                break;
+            }
+        }
+        if(d>1) {
+            digit+=(Integer.toString(s-1));
+            d--;
+            while(d>1) {
+                digit+="0";
                 d--;
             }
         }
-        if (s > 0 && d == 0) {
-            remainder = s +1;
-            if (remainder >= 10) {
-                System.out.println("Number cannot be formed with given constraints");
-            } else {
-                System.out.println("Smallest number is : " + remainder + digit.substring(1));
-            }
-        } else {
-            System.out.println("Smallest number is : " + digit);
-        }
+        digit+="1";
+        System.out.println("Smallest number formed is (in reverse)" + digit);
     }
 
 }

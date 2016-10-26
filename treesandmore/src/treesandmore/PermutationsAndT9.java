@@ -64,7 +64,7 @@ public class PermutationsAndT9 {
     
     public static void main(String[] args) {
         // permutations of a string n!
-        permutationsOfAString("abc", 0, "abc".length());
+        permutationsOfAString("abcd", 0, "abcd".length());
         
         //permute strings in arrays -> n!
         list1.add("eat");list1.add("sleep");

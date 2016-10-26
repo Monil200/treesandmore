@@ -33,7 +33,7 @@ public class Trie {
         for(int i=0;i<s.length();i++) {
             t = s.charAt(i);
             if(children.containsKey(t)) {
-                temp = children.get(t);
+                temp = children.get(t);// this assignment is needed as home maybe a new word and homework is existing word in dictionary.
                 children = temp.children;
             } else {
                 temp = new TrieNode(t);

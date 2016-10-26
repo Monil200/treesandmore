@@ -1,5 +1,7 @@
 package treesandmore;
 
+import java.util.Arrays;
+
 // https://leetcode.com/problems/combination-sum-iii/
 /*
  * Find all possible combinations of k numbers that add up to a number n, given that only numbers from 1 to 9 can be used and 
@@ -39,7 +41,26 @@ public class CombinationSum {
                 System.out.println(newMember + "]");
             }
         }
+        int num[] = new int[k];
+        findUniqueCombinations(k, 9, num, 0);
         
+    }
+    
+    // using combination method
+    
+    public static void findUniqueCombinations(int k, int sumToGet, int num[], int start) {
+        for(int i=start;i<k;i++) {
+            for(int j=1;j<=9;j++) {
+                num[i] = j;
+                if (start == 2) {
+                    // could do it based on k values...currently hardcoded k to 3 here
+                    if (num[0] + num[1] + num[2] == sumToGet && num[0] != num[1] && num[1] != num[2] && num[0] < num[1] && num[1] < num[2]) {
+                        System.out.println(Arrays.toString(num));
+                    }
+                }
+                findUniqueCombinations(k,sumToGet, num, start+1);
+            }
+        }
     }
 
 }

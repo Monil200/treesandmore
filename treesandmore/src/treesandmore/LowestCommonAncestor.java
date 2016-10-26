@@ -61,6 +61,42 @@ public class LowestCommonAncestor {
             }
         }
     }
+    
+    // considering args are in format (lower value, higher value) as arguments
+    public Node lowestCommonAncestorinBST(Node root, int a, int b, Node parent) {
+        if (root == null) {
+            return null;
+        } else {
+            if (root.data >= a && root.data <= b) {
+                return root;
+            }
+            if (root.data > a && root.data < b) {
+                return parent;
+            } else if(root.data > a && root.data > b) {
+                return lowestCommonAncestorinBST(root.left, a, b, root);
+            } else {
+                return lowestCommonAncestorinBST(root.right, a, b, root);
+            }
+        }
+    }
+    
+    public Node lcaRecursive(Node root, int a, int b) {
+        if (root == null) {
+            return null;
+        } else {
+            if (root.data == a || root.data == b) {
+                return root;
+            }
+            
+            Node lNode = lcaRecursive(root.left, a,b);
+            Node rNode = lcaRecursive(root.right, a,b);
+            
+            if (lNode != null && rNode != null) {
+                return root;
+            }
+            return (lNode !=null) ? lNode : rNode;
+        }
+    }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         LowestCommonAncestor bst = new LowestCommonAncestor();
@@ -86,6 +122,8 @@ public class LowestCommonAncestor {
                 break;
             }
         }
+        System.out.println("\nLCA in BST:" + bst.lowestCommonAncestorinBST(root, 2, 6, root).data);
+        System.out.println("\nLCA in BST Recursive:" + bst.lcaRecursive(root, 1, 6).data);
     }
 
 }

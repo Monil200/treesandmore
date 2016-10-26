@@ -32,6 +32,25 @@ public class LinkedListTraversal {
             }
         }
     }
+    
+    public void traversalRecursive(Node head) {
+        if (head == null) {
+            return;
+        } else {
+            System.out.print(head.data + ",");
+            traversalRecursive(head.next);
+        }
+    }
+    
+    public void printReverseRecursive(Node head) {
+        if (head == null) {
+            return;
+        } else {
+            Node temp = head;
+            printReverseRecursive(temp.next);
+            System.out.print(head.data + ",");
+        }
+    }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         LinkedListTraversal l = new LinkedListTraversal();
@@ -41,6 +60,10 @@ public class LinkedListTraversal {
         l.push(1);
         System.out.println("--------My First Java Linkedlist Traversal-----------");
         l.traversal(head);
+        System.out.println("--------My First Java Linkedlist Traversal recursive-----------");        
+        l.traversalRecursive(head);
+        System.out.println("--------Linkedlist Traversal Reverse recursive-----------");
+        l.printReverseRecursive(head);
     }
 
 }

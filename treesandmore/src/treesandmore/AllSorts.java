@@ -23,6 +23,7 @@ public class AllSorts {
         
         if(start < end) {
             int p = partition(a, start , end);
+            System.out.print(p+ "p \n");
             for(int k=0;k<a.length;k++)
                 System.out.print(a[k]+" ");
             System.out.println();

@@ -15,7 +15,7 @@ class Node {
 public class BinarySearchTree{
     public static Node root;
     public BinarySearchTree() {
-        this.root = null;
+        root = null;
     }
     
     public void insert(int val) {
