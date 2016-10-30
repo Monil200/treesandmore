@@ -112,6 +112,31 @@ public class LLToCompleteBT {
      }
      
      
+     public void createCompleteBTFromLL(LinkNode head) {
+         if (head == null) {
+             return;
+         } else {
+             Queue<Node> rootQ = new LinkedList<Node>();
+             LinkNode tempHead = head;
+             root = new Node(tempHead.data);
+             Node tempRoot = root;
+             tempHead = tempHead.next;
+             while(tempHead!=null) {
+                 if (tempRoot.left == null) {
+                     tempRoot.left = new Node(tempHead.data);
+                     rootQ.add(tempRoot.left);
+                     tempHead = tempHead.next;
+                 } else if (tempRoot.right == null) {
+                     tempRoot.right = new Node(tempHead.data);
+                     rootQ.add(tempRoot.right);
+                     tempHead = tempHead.next;
+                     tempRoot = rootQ.remove();
+                 }
+             }
+         }
+     }
+     
+     
      
  
  
@@ -129,11 +154,21 @@ public class LLToCompleteBT {
          
          b.linkTraverse(head);
          
-         System.out.println("Inorder traversal after creating Tree \n");
+         System.out.println("Creating Tree... \n");
          b.createBTFromLL(head);
          
-         System.out.println("\nlink list traversal\n");
+         System.out.println("\nTree traversal after creation traversal\n");
          b.inorder(root);
+         
+         //2nd variation
+         root = null;
+         System.out.println("Creating Tree V2... \n");
+         b.createCompleteBTFromLL(head);
+         
+         System.out.println("\nTree traversal after creation v2\n");
+         b.inorder(root);
+          
+         
      }
 
 }

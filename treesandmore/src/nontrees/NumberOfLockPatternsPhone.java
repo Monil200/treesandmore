@@ -1,4 +1,4 @@
-package treesandmore;
+package nontrees;
 
 public class NumberOfLockPatternsPhone {
     public static int patternsTillNow=0;

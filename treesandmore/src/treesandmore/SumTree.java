@@ -55,6 +55,16 @@ public class SumTree {
          }
      }
      
+     public void convertToSumV2(Node root) {
+         if (root == null || (root.left == null && root.right == null)) {
+             return;
+         } else {
+             convertToSumV2(root.left);
+             convertToSumV2(root.right);
+             root.data += root.left.data + root.right.data;
+         }
+     }
+     
      public int getSum(Node root) {
          if (root == null) {
              return 0;
@@ -96,6 +106,22 @@ public class SumTree {
          n.right.left = new Node(3);
          
          System.out.println("\n is sumTree in O(n^2)\n" + b.isSumTree(n));
+         
+         
+         Node n1 = new Node(1);
+         n1.left = new Node(2);
+         n1.right = new Node(3);
+         n1.left.left = new Node(4);
+         n1.left.right = new Node(5);
+         
+         n1.right.left = new Node(6);
+         n1.right.right = new Node(7);
+         
+         System.out.println("Preodre traversal before convertSumV2 \n");
+         b.preOrderTraversal(n1);
+         b.convertToSumV2(n1);
+         System.out.println("Preodre traversal after convertSumV2 \n");
+         b.preOrderTraversal(n1);
          
      }
 

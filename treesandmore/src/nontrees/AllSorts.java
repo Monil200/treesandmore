@@ -1,4 +1,4 @@
-package treesandmore;
+package nontrees;
 
 public class AllSorts {
     public void bubbleSort(int a[]) {

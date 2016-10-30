@@ -1,4 +1,4 @@
-package treesandmore;
+package nontrees;
 import java.util.*;
 //https://community.topcoder.com/stat?c=problem_statement&pm=8019&rd=10773
 // .. only search part of it 
