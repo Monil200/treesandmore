@@ -1,4 +1,4 @@
-package treesandmore;
+package nontrees;
 
 
 class Point {

@@ -30,7 +30,6 @@ public class SiblingCousins {
             NodeMod current = root;
             int height = 0;
             System.out.println();
-            System.out.println("new");
             while(true) {
                 height++;
                 if (newNode.data < current.data) {
@@ -61,7 +60,7 @@ public class SiblingCousins {
             return;
         } else {
             inorderTraversal(root.left);
-            System.out.println(root.data + ",");
+            System.out.print(root.height + ",");
             inorderTraversal(root.right);
         }
     }

@@ -1,4 +1,4 @@
-package treesandmore;
+package nontrees;
 /*
  * Given a grid of numbers, find maximum length Snake sequence and print it. If multiple snake sequences exists with the maximum length, print any one of them.
 

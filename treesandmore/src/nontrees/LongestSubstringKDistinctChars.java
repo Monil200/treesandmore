@@ -5,7 +5,7 @@ public class LongestSubstringKDistinctChars {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         
-        String a = "monil";
+        String a = "ecelob";
         HashMap<Character, Integer> map = new HashMap<Character, Integer>();
         int k = 2, putCount = 0;
         char t;

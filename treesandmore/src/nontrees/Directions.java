@@ -1,4 +1,4 @@
-package treesandmore;
+package nontrees;
 
 public class Directions {
     int steps[] = {1 ,2 ,2, 2, 1}; // north-west-south-east all the time order is followed

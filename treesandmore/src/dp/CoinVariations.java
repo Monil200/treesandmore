@@ -19,11 +19,6 @@ public class CoinVariations {
                     if (minSoFar > temp) {
                         minSoFar = temp;
                     }
-                    if (i==7) {
-                        System.out.println(Arrays.toString(numCoins));
-                        System.out.println(temp);
-                        System.out.println(minSoFar);
-                    }
                 } catch (Exception e) {
                 }
             }

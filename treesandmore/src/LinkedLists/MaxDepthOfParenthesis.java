@@ -1,4 +1,4 @@
-package treesandmore;
+package LinkedLists;
 //Find maximum depth of nested parenthesis in a string
 //We are given a string having parenthesis like below
 //     “( ((X)) (((Y))) )”

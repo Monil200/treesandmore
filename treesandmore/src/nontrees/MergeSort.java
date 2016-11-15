@@ -1,4 +1,4 @@
-package treesandmore;
+package nontrees;
 
 import java.util.Arrays;
 
@@ -10,7 +10,7 @@ public class MergeSort {
         int size = 2;
         while(size<=limit) {
             createPartitionsOfSize(a, size);
-            size++;
+            size+=2;
         }
         System.out.println("Result: "  + Arrays.toString(a));
     }

@@ -31,7 +31,6 @@ public class NumberOfLockPatternsPhone {
         findNumberOfLockPatterns(x,y+1,keypad,visited,num,count);
         findNumberOfLockPatterns(x-1,y+1,keypad,visited,num,count);
         visited[x][y] = 0; // backtrack
-        count=0;
         
     }
     public static void main(String[] args) {
