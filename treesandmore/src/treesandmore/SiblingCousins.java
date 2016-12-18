@@ -102,7 +102,7 @@ public class SiblingCousins {
         b.insert(6);
         b.insert(8);
         b.inorderTraversal(root);
-        NodeMod target = b.findTargetHeight(root, 8);
+        NodeMod target = b.findTargetHeight(root, 1);
         System.out.println("----------");
         System.out.println(target.height);
         b.findCousins(root,target.height);

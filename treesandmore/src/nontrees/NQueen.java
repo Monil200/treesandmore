@@ -37,10 +37,12 @@ public class NQueen {
                 a[i][col] = 1;
                 if (solveNQueen(col+1, a) == true) {
                     return true;
+                } else {
+                    a[i][col] = 0;
                 }
             }
             
-            a[i][col] = 0; // backtrack
+//            a[i][col] = 0; // backtrack
         }
         return false;
     }
