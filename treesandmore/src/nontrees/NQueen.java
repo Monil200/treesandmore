@@ -12,7 +12,7 @@ public class NQueen {
             }
         }
         
-        for(int i=0, j=0; i<N && j<col; i++, j++) { // diagonal from top left to bottom right
+        for(int i=row-1, j=col-1; i>=0 && j>=0; i--, j--) { // diagonal from top left to bottom right
             if (a[i][j] == 1) {
                 return false;
             }
@@ -38,11 +38,11 @@ public class NQueen {
                 if (solveNQueen(col+1, a) == true) {
                     return true;
                 } else {
-                    a[i][col] = 0;
+                    //a[i][col] = 0;
                 }
             }
             
-//            a[i][col] = 0; // backtrack
+            a[i][col] = 0; // backtrack
         }
         return false;
     }

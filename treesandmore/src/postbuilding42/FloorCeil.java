@@ -60,43 +60,63 @@ public class FloorCeil {
         }
     }
     
-    public Node getFloor(Node root, int target, Node parent) {
+    public void getCeil(Node root, int target, Node ceil) {
         if (root == null) {
-            return null;
+            return;
         } else {
-            if (root.data > target) {
-                return getFloor(root.left,target, parent);
-            } else if (root.data < target){
-                parent = root;
-                return getFloor(root.right,target, parent);
-            } else if (root.data == target) {
-                if (root.left != null)
-                    return getMax(root.left);
-                else
-                    return parent;
+            if (root.data == target && ceil != null) {
+                Node maxIfAny = getMax(root);
+                if (maxIfAny.data > ceil.data) {
+                    System.out.println("the ceil of target " + target + " is " + maxIfAny.data);
+                } else {
+                    System.out.println("the ceil of target " + target + " is " + ceil.data);
+                }
+                return;
             }
-            return null;
+            if (root.data > target) {
+                ceil = root;
+                getCeil(root.left, target, ceil);
+            } else {
+                getCeil(root.right, target,ceil);
+            }
         }
     }
     
-    public Node getCeil(Node root, int target, Node parent) {
+    public void getFloor(Node root, int target, Node floor) {
         if (root == null) {
-            return null;
+            return;
         } else {
-            if (root.data > target) {
-                parent = root;
-                return getCeil(root.left,target, parent);
-            } else if (root.data < target){
-                return getCeil(root.right,target, parent);
-            } else if (root.data == target) {
-                if (root.right != null)
-                    return getMin(root.right);
-                else
-                    return parent;
+            if (root.data == target) {
+                Node minIfAny = getMin(root);
+                if (floor == null) {
+                    if (minIfAny == null) {
+                        System.out.println("No min found");
+                    } else {
+                        System.out.println("the FLoor of target " + target + " is " + minIfAny.data);
+                    }
+                } else{
+                    if (minIfAny.data < floor.data) {
+                        System.out.println("the FLoor of target " + target + " is " + minIfAny.data);
+                    } else {
+                        System.out.println("the FLoor of target " + target + " is " + floor.data);
+                    }
+                }
+                return;
             }
-            return null;
+            if (root.data < target) {
+                floor = root;
+                getFloor(root.right, target, floor);
+            } else {
+                getFloor(root.left, target,floor);
+            }
         }
     }
+    
+    
+    
+    
+    
+    
     
     public static void main(String[] args) {
         // TODO Auto-generated method stub
@@ -108,9 +128,12 @@ public class FloorCeil {
         obj.insert(6);
         obj.insert(8);
         obj.inorder(obj.root);
-        int target = 2;
-        System.out.println("\n The floor of:" + target + " is: " + obj.getFloor(obj.root, target, null).data);
-        System.out.println("\n The Ceil of:" + target + " is: " + obj.getCeil(obj.root, target, null).data);
+        int target = 4;
+        Node ceil = null;
+        System.out.println();
+        obj.getCeil(obj.root, target, ceil);
+        obj.getFloor(obj.root, target, ceil);
+        
     }
 
 }

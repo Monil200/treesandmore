@@ -52,10 +52,26 @@ public class SubtreeSizes {
             root.size = 1;
             return 1;
         }
-        System.out.println(root.data + "---");
         root.size = 1 + memoizedSizes(root.left) + memoizedSizes(root.right);
         return root.size;
         
+    }
+    
+    public boolean isBalanced(NodeSize root) {
+        if (root == null) {
+            return true;
+        } else {
+            int left, right;
+            if (root.left != null)
+                left = root.left.size;
+            else 
+                left = 0;
+            if (root.right != null)
+                right = root.right.size;
+            else 
+                right = 0;
+            return Math.abs(left - right) <= 1 && isBalanced(root.left) && isBalanced(root.right);
+        }
     }
     
     
@@ -87,9 +103,10 @@ public class SubtreeSizes {
         obj.insert(1);
         obj.insert(3);
         obj.insert(6);
-        obj.insert(7);
+        obj.insert(5);
         obj.insert(8);
         System.out.println("\n size of tree :" + obj.memoizedSizes(obj.root));
         obj.inorderTraversalSize(obj.root);
+        System.out.println("\n Is balanced :" + obj.isBalanced(obj.root));
     }
 }

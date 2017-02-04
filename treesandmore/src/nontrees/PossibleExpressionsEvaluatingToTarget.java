@@ -26,7 +26,7 @@ public class PossibleExpressionsEvaluatingToTarget {
                 targetChar[signCount] = '$';
             i = signCount;
         }
-        System.out.println(Arrays.toString(targetChar));
+//        System.out.println(Arrays.toString(targetChar));
         possibleExpressions(targetChar, 1);
 //        System.out.println(Arrays.toString(targetChar));
     }

@@ -31,7 +31,7 @@ public class KnightPathsNumber {
         System.out.println("n:" + n + " currentLimit:" + currentLimit);
         
         for(Integer i: a) {
-            get(i, currentLimit, maxLimit);
+            get(i, currentLimit+1, maxLimit);
             // currentLimit--;
         }
         
@@ -65,7 +65,7 @@ public class KnightPathsNumber {
         
         // boolean visited[] = new boolean[10]; // false
         soln.get(1, 0, 3);
-        System.out.println("The number of unique paths in horse behavious is " + soln.paths);
+        System.out.println("The number of unique paths in horse behaviour is " + soln.paths);
     }
 
 }

@@ -4,8 +4,8 @@ public class IncreasingTriplet {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-//        int a[] = {5, 4, 3, 2, 1};
-        int a[] = {1, 2, 3, 4, 5};
+        int a[] = {5, 4, 3, 2, 1};
+//        int a[] = {1, 2, 3, 4, 5};
         int num = Integer.MAX_VALUE,num2 = Integer.MAX_VALUE,num3 = Integer.MAX_VALUE;
         for(int i=0;i<a.length;i++) {
             if (a[i] < num) {

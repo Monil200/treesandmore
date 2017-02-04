@@ -1,28 +1,24 @@
-package nontrees;
+package post16;
 
 import java.util.Arrays;
 
-public class QuickSortAndVAriations {
-    static int xLargest = 3; 
+public class QuickSort {
+
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        int a[] = {2, 11 ,12,45 ,67,3, 90,100,1,21};
-        quickSort(a,0,a.length-1);
+        int a[] = {22 ,55,11, 3 ,10 ,89 , 561};
+        quickSort(a, 0 ,a.length-1);
+//        Arrays.sort(a);
+//        System.out.println(Arrays.toString(a));
         System.out.println(Arrays.toString(a));
         
     }
     
-    public static void quickSort(int a[], int p, int q) {
-        if (p<q ) {
-            int x = partition(a,p,q);
-            System.out.println("x is:" + x);
-            if (x == xLargest) {
-                System.out.println("xLargest number is:" + a[xLargest]);
-            } else if (x > xLargest) {
-                quickSort(a,p,x-1);
-            } else {
-                quickSort(a,x+1,q);
-            }
+    public static void quickSort(int a[], int low, int high) {
+        if (low< high) {
+            int p = partition(a, low, high);
+            quickSort(a, low, p-1);
+            quickSort(a, p+1, high);
         }
     }
     

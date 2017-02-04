@@ -6,27 +6,37 @@ public class HitCounter {
     
     List<Integer> hit = new ArrayList<Integer>();
     int counter;
+    int lastHitTimestampPos;
     
     public HitCounter() {
-        this.counter = 0;
+        lastHitTimestampPos = 0;
     }
     
     void getCounter(int timestamp) {
+        counter = 0;
         
-        int firstHitInPipeline = (this.hit.size() > 0) ? this.hit.get(0) : -1;
-        if (firstHitInPipeline == -1) {
-            System.out.println(" No hits in last 5 min");
-        } else {
-            while(timestamp - firstHitInPipeline > 300) {
-                this.hit.remove(0);
-                firstHitInPipeline = this.hit.get(0);
-            }
-            System.out.println(" hits till now are " + this.hit.size());
+        if (timestamp < hit.get(lastHitTimestampPos-1)) {
+            System.out.println("i m returning");
+            return;
         }
+        int start = lastHitTimestampPos-1;
+        System.out.println(start + "--------");
+        System.out.println(timestamp+ "=----------"+ hit.get(start));
+        while((timestamp - hit.get(start)) <= 300 && start >= 0) {
+            System.out.println(counter + "--------");
+            counter++;
+            start--;
+        }
+        System.out.println(counter + " - ");
+        
+        
+        
+        
     }
     
     public void hit(int timestamp) {
         this.hit.add(timestamp);
+        lastHitTimestampPos++;
     }
     
     public static void main(String[] args) {
@@ -38,7 +48,7 @@ public class HitCounter {
         obj.hit(4);
         obj.hit(301);
         obj.getCounter(302);
-        obj.getCounter(303);
+//        obj.getCounter(303);
     }
 
 }

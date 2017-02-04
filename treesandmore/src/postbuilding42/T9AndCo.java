@@ -2,7 +2,7 @@ package postbuilding42;
 import java.util.*;
 public class T9AndCo {
     
-    public static void combinationsOfStting(String s, int start) {
+    public static void combinationsOfString(String s, int start) {
         if (start == s.length()) {
             System.out.println(s);
         } else {
@@ -12,7 +12,7 @@ public class T9AndCo {
                 toChar[start] = toChar[i];
                 toChar[i] = temp;
                 s = String.valueOf(toChar);
-                combinationsOfStting(s, start+1);
+                combinationsOfString(s, start+1);
             }
         }
     }
@@ -63,7 +63,7 @@ public class T9AndCo {
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        combinationsOfStting("abc", 0);
+        combinationsOfString("abc", 0);
         dict.put(2, "abc");
         dict.put(3, "def");
         dict.put(4, "ghi");

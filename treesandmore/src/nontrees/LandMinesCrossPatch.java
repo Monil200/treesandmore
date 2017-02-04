@@ -42,7 +42,7 @@ public class LandMinesCrossPatch {
         getShprtestPathAcrossPatch(patch, currentLength, i-1, j, visited);
         getShprtestPathAcrossPatch(patch, currentLength, i, j-1, visited);
 //        currentLength--; // backTrack
-        //visited[i][j] = 0;
+//        visited[i][j] = 0;
     }
 
     public static void main(String[] args) {
