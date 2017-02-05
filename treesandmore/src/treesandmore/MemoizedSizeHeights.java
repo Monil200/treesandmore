@@ -2,6 +2,7 @@ package treesandmore;
 class NodeM {
     int data;
     int height,size;
+    int distanceL, distanceR;
     NodeM left,right;
     NodeM(int val) {
         data = val;

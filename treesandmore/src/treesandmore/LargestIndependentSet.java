@@ -21,7 +21,8 @@ public class LargestIndependentSet {
         } else {
             
             int set_excl = largetIndependentSet(root.left) + largetIndependentSet(root.right); // excluding root 
-            int set_inc = 1;
+            int set_inc = root.data;
+//            int set_inc = 1;// if set size is needed
             if (root.left != null) {
                 set_inc += largetIndependentSet(root.left.left) + largetIndependentSet(root.left.right);
             }
