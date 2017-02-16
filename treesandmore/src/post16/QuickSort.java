@@ -6,7 +6,8 @@ public class QuickSort {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        int a[] = {22 ,55,11, 3 ,10 ,89 , 561};
+//        int a[] = {22 ,55,11, 3 ,10 ,89 , 561};
+        int a[] = {45 ,2 ,66, 71, 1 ,89, 10, 111};
         quickSort(a, 0 ,a.length-1);
 //        Arrays.sort(a);
 //        System.out.println(Arrays.toString(a));
