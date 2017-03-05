@@ -39,6 +39,8 @@ public class Knapsack {
         }
         
         System.out.println(opt[w.length][knapsack]);
+        
+        int x = (int) Math.pow(2, 4);
     }
 
 }

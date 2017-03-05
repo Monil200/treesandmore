@@ -46,6 +46,26 @@ public class SortObjVariations {
         for(Employee e: list) {
             System.out.println("id:" + e.id + " name:" + e.name);
         }
+        
+        PriorityQueue<Float> pq = new PriorityQueue<Float>(new Comparator<Float>() {
+            public int compare(Float a, Float b) {
+                if (b > a)
+                    return 1;
+                else if (b < a)
+                    return -1;
+                else
+                    return 0;
+                           
+                
+            }
+        });
+        pq.add(34.00f);
+        pq.add(100.91f);
+        pq.add(-100.87f);
+        int limit = pq.size();
+        for(int i=0;i<limit;i++) {
+            System.out.println("****" + pq.poll());
+        }
     }
 
 }
