@@ -1,7 +1,7 @@
 package treesandmore;
 
 public class SumTree {
-     public static Node root;
+     public Node root;
      public SumTree() {
          root = null;
      }
@@ -55,6 +55,37 @@ public class SumTree {
          }
      }
      
+     public int convertToSumV3(Node root) {
+         if (root == null) {
+             return 0;
+         } else {
+             if (root.left == null && root.right == null) {
+                 int rootD = root.data;
+//                 root.data = 0; // to so isSumTreeV3 check, but as per g4g it should be 0..
+                 return rootD;
+             }
+             int rootData = root.data;
+             root.data = convertToSumV3(root.left) + convertToSumV3(root.right);
+             return rootData + root.data;
+         }
+     }
+     
+     public boolean isSumTreeV3(Node root) {
+         if (root == null || (root.left == null && root.right==null))
+             return true;
+         else {
+             isSumTreeV3(root.left);
+             isSumTreeV3(root.right);
+             int ldata = (root.left!=null) ? root.left.data : 0;
+             int rdata = (root.right!=null) ? root.right.data : 0;
+             if (root.data == (ldata + rdata))
+                 return true;
+             else {
+                 return false;
+             }
+         }
+     }
+     
      public void convertToSumV2(Node root) {
          if (root == null || (root.left == null && root.right == null)) {
              return;
@@ -92,10 +123,10 @@ public class SumTree {
          b.insert(2);
          b.insert(6);
          System.out.println("Preodre traversal before convertSum \n");
-         b.preOrderTraversal(root);
-         b.convertToSum(root);
+         b.preOrderTraversal(b.root);
+         b.convertToSum(b.root);
          System.out.println("Preodre traversal after convertSum \n");
-         b.preOrderTraversal(root);
+         b.preOrderTraversal(b.root);
          
          Node n = new Node(26);
          n.left = new Node(10);
@@ -123,6 +154,18 @@ public class SumTree {
          System.out.println("Preodre traversal after convertSumV2 \n");
          b.preOrderTraversal(n1);
          
+         
+         SumTree b1 = new SumTree();
+         b1.insert(40);
+         b1.insert(20);
+         b1.insert(60);
+         b1.insert(80);
+         b1.insert(10);
+         b1.insert(30);
+         b.convertToSumV3(b1.root);
+         System.out.println("\n Preodre traversal before convertSumV3 \n");
+         b.preOrderTraversal(b1.root);
+         System.out.println("\n Is SumTree V3? - " + b.isSumTreeV3(b1.root));
      }
 
 }

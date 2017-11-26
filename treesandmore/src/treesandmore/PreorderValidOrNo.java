@@ -48,8 +48,8 @@ public class PreorderValidOrNo {
     
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-//        int a[] = {40, 30, 35, 80, 100};
-        int a[] = {40, 30, 35, 20, 80, 100};
+        int a[] = {40, 30, 35, 80, 100};
+//        int a[] = {40, 30, 35, 20, 80, 100};
         PreorderValidOrNo obj = new PreorderValidOrNo();
         
         obj.createTreeFromPreorder(root, a);

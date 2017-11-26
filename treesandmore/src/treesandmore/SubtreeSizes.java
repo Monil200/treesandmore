@@ -44,16 +44,10 @@ public class SubtreeSizes {
     public int memoizedSizes(NodeSize root) {
         if (root == null) {
             return 0;
-        }
-        if (root.size != -1) {
+        } else {
+            root.size = 1 + memoizedSizes(root.left) + memoizedSizes(root.right);
             return root.size;
         }
-        if (root.left == null && root.right == null) {
-            root.size = 1;
-            return 1;
-        }
-        root.size = 1 + memoizedSizes(root.left) + memoizedSizes(root.right);
-        return root.size;
         
     }
     

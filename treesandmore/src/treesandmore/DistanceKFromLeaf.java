@@ -64,6 +64,22 @@ public class DistanceKFromLeaf {
         }
     }
     
+    public int distanceFromLeafV2(NodeM root, int k) {
+        if (root == null || (root.left == null && root.right == null)) {
+            return 0;
+        } else {
+            int distl = distanceFromLeafV2(root.left, k) + 1;
+            int distr = distanceFromLeafV2(root.right, k) + 1;
+            
+            if (distl == k || distr == k )
+                System.out.println(root.data);
+            if (distl <= k)
+                return distl;
+            return distr;
+            
+        }
+    }
+    
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         DistanceKFromLeaf obj = new DistanceKFromLeaf();
@@ -74,6 +90,7 @@ public class DistanceKFromLeaf {
         obj.insert(6);
         obj.insert(8);
         obj.distanceFromLeaf(obj.root);
+        obj.distanceFromLeafV2(obj.root, 0);
         obj.inorder(obj.root);
     }
 

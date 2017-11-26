@@ -22,6 +22,7 @@ Output: i like ice cream and man go
 import java.util.*;
 public class WordBreak {
     public static void wordBreakRecurr(String s, String curr, String word, int i, HashSet<String> dict) {
+        System.out.println("--" + curr + " --" + s);
         if (i == word.length()) {
             if (dict.contains(curr))
                 System.out.println(s+curr);

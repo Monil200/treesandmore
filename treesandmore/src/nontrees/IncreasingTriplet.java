@@ -4,20 +4,38 @@ public class IncreasingTriplet {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        int a[] = {5, 4, 3, 2, 1};
-//        int a[] = {1, 2, 3, 4, 5};
-        int num = Integer.MAX_VALUE,num2 = Integer.MAX_VALUE,num3 = Integer.MAX_VALUE;
+        int a[] = {12,11,10,5,6,2,30};
+        int smaller[] = new int[a.length];
+        int greater[] = new int[a.length];
+        
         for(int i=0;i<a.length;i++) {
-            if (a[i] < num) {
-                num = a[i];
-            } else if(a[i] < num2) {
-                num2 = a[i];
-            } else if (a[i] < num3) {
-                num3= a[i];
+            smaller[i] = greater[i] = -1;
+        }
+        // smaller fill up
+        int min = a[0];
+        for(int i=1;i<a.length;i++) {
+            if (a[i] > min) {
+                smaller[i] = 1;
+            } else if ( a[i] < min) {
+                min = a[i];
             }
         }
         
-        System.out.println("3 nums are:" + num + ", " + num2 + ", " + num3);
+        int max = a[a.length-1];
+        for(int i=a.length-2;i>=0;i--) {
+            if (a[i] < max) {
+                greater[i] = 1;
+            } else if ( a[i] > max) {
+                max = a[i];
+            }
+        }
+        
+        for(int i=1;i<a.length-1;i++) {
+            if (smaller[i] == greater[i] && greater[i] == 1) {
+                System.out.println("Triplet found, mid is at -> " + i + " : " + a[i]);
+            }
+        }
+        
     }
 
 }

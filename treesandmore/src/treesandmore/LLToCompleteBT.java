@@ -154,7 +154,7 @@ public class LLToCompleteBT {
          
          b.linkTraverse(head);
          
-         System.out.println("Creating Tree... \n");
+         System.out.println("\n Creating Tree... \n");
          b.createBTFromLL(head);
          
          System.out.println("\nTree traversal after creation traversal\n");
@@ -162,7 +162,7 @@ public class LLToCompleteBT {
          
          //2nd variation
          root = null;
-         System.out.println("Creating Tree V2... \n");
+         System.out.println("\n Creating Tree V2... \n");
          b.createCompleteBTFromLL(head);
          
          System.out.println("\nTree traversal after creation v2\n");

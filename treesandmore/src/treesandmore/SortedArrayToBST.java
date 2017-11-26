@@ -17,8 +17,8 @@ public class SortedArrayToBST {
     }
     
     public Node sortedArrayToBST(Node root, int min, int max, int a[]) {
-        if (min >= max && min >= 0 && max <=a.length -1) {
-            return new Node(a[min]);
+        if (min >max) {
+            return null;
         } else {
             int mid = (min + max)/2;
             root = new Node(a[mid]);
@@ -30,7 +30,7 @@ public class SortedArrayToBST {
     
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        int a[] = {1,2,3,4,5,6,7};
+        int a[] = {1,2,3,4,5,6,7, 9};
         SortedArrayToBST obj = new SortedArrayToBST();
         obj.root = obj.sortedArrayToBST(obj.root, 0, a.length-1,a);
         obj.inorderTraversal(obj.root);
