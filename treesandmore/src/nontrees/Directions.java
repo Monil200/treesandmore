@@ -33,18 +33,18 @@ public class Directions {
             }
             if (path.charAt(i) == 'L') {
                 switch(currentDirection) {
-                case "N":
-                    currentDirection = "W";
-                    break;
-                case "S":
-                    currentDirection = "E";
-                    break;
-                case "E":
-                    currentDirection = "N";
-                    break;
-                case "W":
-                    currentDirection = "S";
-                    break;
+                    case "N":
+                        currentDirection = "W";
+                        break;
+                    case "S":
+                        currentDirection = "E";
+                        break;
+                    case "E":
+                        currentDirection = "N";
+                        break;
+                    case "W":
+                        currentDirection = "S";
+                        break;
                 }
             }
             if (path.charAt(i) == 'G') {

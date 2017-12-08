@@ -46,7 +46,7 @@ public class AllSorts {
             if (start < end) {
                 swap(a, start, end);
             } else {
-                return end;
+                return start;
             }
             
         }

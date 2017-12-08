@@ -67,7 +67,7 @@ public class BinaryTreeGlassFill {
                 } else if (root.left != null) {
                     fillNodes(root.left, inFlow);
                 } else if (root.right != null) {
-                    fillNodes(root.right, inFlow/2);
+                    fillNodes(root.right, inFlow);
                 }
             }
         }
@@ -113,7 +113,7 @@ public class BinaryTreeGlassFill {
         obj.insert(6);
         obj.insert(7);
         obj.insert(5);
-        obj.fillNodes(obj.root, 7);
+        obj.fillNodes(obj.root, 6);
         System.out.println("---------Inorder--------");
         obj.inorder(obj.root);
         obj.fillNodesTimeCalculate(obj.root, 4, 4, 0); // initially unitsOfWater == rate

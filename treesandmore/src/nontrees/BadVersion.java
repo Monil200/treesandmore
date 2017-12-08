@@ -4,7 +4,7 @@ public class BadVersion {
     public static int apiCalledCount = 0;
     public static boolean isBadVersion(int n) {
         apiCalledCount++;
-        if (n >= 90) { // 26th is the version from where the bug got introduced.
+        if (n >= 26) { // 26th is the version from where the bug got introduced.
             return true;
         }
         return false;
@@ -18,6 +18,7 @@ public class BadVersion {
         int low = min;
         int ncopy = 0;
         while(ncopy != n) {
+//        while(low < high) {
             currentVersion = isBadVersion(n);
             if (currentVersion) {
                 high = n;
