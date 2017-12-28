@@ -1,10 +1,27 @@
 package nontrees;
 
 public class IncreasingTriplet {
-
+    
+    public static boolean increasingTripletOnePass(int a[]) {
+        int x = Integer.MAX_VALUE, y = Integer.MAX_VALUE;
+        
+        
+        for(int i=0;i<a.length;i++) {
+            if (a[i] < x) {
+                x = a[i];
+            } else if (a[i] < y) {
+                y = a[i];
+            } else {
+                return true;
+            }
+        }
+        
+        return false;
+    }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         int a[] = {12,11,10,5,6,2,30};
+        // smaller greater approach with 3 passes can be used to find total number of triplet subsequences in array 
         int smaller[] = new int[a.length];
         int greater[] = new int[a.length];
         
@@ -35,7 +52,7 @@ public class IncreasingTriplet {
                 System.out.println("Triplet found, mid is at -> " + i + " : " + a[i]);
             }
         }
-        
+        System.out.println("Do we have increasing triplet ?? " + increasingTripletOnePass(a));
     }
 
 }

@@ -5,28 +5,33 @@ package nontrees;
  * */
 public class GeneralizedAbbreviations {
     
-    public static void generateAbbr(String s, String prefix, String integer, int currIndex, boolean isPreviousNumber, boolean isCurrentNumber) {
-        if (currIndex == s.length()) {
-            return;
+    public static void generateAbbr(String s, int currentIndex, String output, int index) {
+//        System.out.println(output + " **");
+        if (output.length() == s.length()) {
+            System.out.println(output);
+            output = "";
         }
-//        if (isPreviousNumber == isCurrentNumber) {
+//        if (isPreviousNumber) {
 //            return;
 //        }
-        System.out.println(prefix + integer + s.substring(prefix.length()+1, s.length()));
-        
-        for(int i=currIndex;i<s.length();i++) {
-            for(int j=i;j<s.length();j++) {
-                System.out.println("currIndex: " + currIndex + " j:" + j);
-                prefix = s.substring(currIndex, j);
-                integer = Integer.toString(j+1);
-                generateAbbr(s,prefix,integer,++currIndex, true, false);
+        for(int i=currentIndex;i<s.length();i++) {
+            System.out.print("  i: " + i + " ");
+            if ((i - 0) > 0) {
+                output += s.substring(0, i);
             }
+            output += String.valueOf(index);
+            if (i+1 < s.length()) {
+                output += s.substring(i+1, s.length());
+            }
+            generateAbbr(s, ++currentIndex, output, index);
+            output = "";
+//            --index;
         }
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         String s = "word";
-        generateAbbr(s, "", "w", 0, false, false);
+        generateAbbr(s, 0, "", 1);
     }
 
 }

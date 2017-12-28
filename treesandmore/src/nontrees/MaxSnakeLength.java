@@ -1,4 +1,7 @@
 package nontrees;
+
+import java.util.Arrays;
+
 /*
  * Given a grid of numbers, find maximum length Snake sequence and print it. If multiple snake sequences exists with the maximum length, print any one of them.
 
@@ -14,7 +17,36 @@ For example,
 In above grid, the longest snake sequence is: (9, 8, 7, 6, 5, 6, 7)
  */
 public class MaxSnakeLength {
-
+    /**
+     * 
+     * 
+     * basically check if diff of a[i][j] with neighbors (top & left), if diff is 1 then take the max(top, left) memorized values + 1 
+     * or else if solution[i][j] not initialized then mark it as length 1.
+     * Technically - extend current either from top or left, whichever is max, or start new length
+     */
+    public static void findLargestLengthSnake(int a[][], int mem[][]) { // memorized lengths
+        int lengthFromLeft= 0, lengthFromTop = 0;
+        for(int i=0;i<a.length;i++) {
+            for(int j=0;j<a[0].length;j++) {
+                if(i-1 >= 0) { // left
+                    if(Math.abs(a[i][j] - a[i-1][j]) == 1) {
+                        lengthFromLeft = Math.max(mem[i-1][j] + 1, 1);
+                    }
+                }
+                if(j-1 >= 0) { // left
+                    if(Math.abs(a[i][j] - a[i][j-1]) == 1) {
+                        lengthFromTop = Math.max(mem[i][j-1] + 1, 1);
+                    }
+                }
+                mem[i][j] = Math.max(lengthFromLeft, lengthFromTop);
+                lengthFromTop = lengthFromLeft = 0;
+            }
+        }
+        System.out.println("---------NEW-----------");
+        for(int i=0;i<mem.length;i++) {
+            System.out.println(Arrays.toString(mem[i]));
+        }
+    }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         int a[][] = {
@@ -23,55 +55,7 @@ public class MaxSnakeLength {
             {7, 3, 1, 6},
             {1, 1, 1, 7},
          };
-        Integer maxSnakeLength[][] = new Integer[a.length][a[0].length];
-        int neighbouringMax = 0;
-        
-        // initialize
-        for(int i=0;i<a.length;i++) {
-            for(int j=0;j<a[i].length;j++) {
-                maxSnakeLength[i][j] = 0;
-            }
-        }
-        // basically check if diff of a[i][j] with neighbors (top & left), if diff is 1 then take the max(top, left) memoized values +1 
-        // or else if solution[i][j] not initialized then mark it as length 1.
-        for(int i=0;i<a.length;i++) {
-            for(int j=0;j<a[i].length;j++) {
-                if (i-1 >= 0) {
-                    if (Math.abs(a[i][j] - a[i-1][j]) == 1) {
-                        if (maxSnakeLength[i][j] > 0) {
-                            if (j-1 > 0) {
-                                maxSnakeLength[i][j] = Math.max(maxSnakeLength[i-1][j], maxSnakeLength[i][j-1]) + 1;
-                            }
-                        } else {
-                            if (j-1 >= 0)
-                                neighbouringMax = Math.max(maxSnakeLength[i-1][j], maxSnakeLength[i][j-1]);
-                            else {
-                                neighbouringMax = 0;
-                            }
-                            maxSnakeLength[i][j] = Math.max(neighbouringMax+1, 1);
-                        }
-                    }
-                }
-                if (j-1 >= 0) {
-                    if (Math.abs(a[i][j] - a[i][j-1]) == 1) {
-                        if (maxSnakeLength[i][j] > 0) {
-                            if (i-1>0) {
-                                maxSnakeLength[i][j] = Math.max(maxSnakeLength[i-1][j], maxSnakeLength[i][j-1]) + 1;
-                            }
-                        } else {
-                            maxSnakeLength[i][j] =Math.max(maxSnakeLength[i][j-1] +1, 1);
-                        }
-                    }
-                }
-            }
-        }
-        
-        for(int i=0;i<a.length;i++) {
-            for(int j=0;j<a[i].length;j++) {
-               System.out.print(maxSnakeLength[i][j]);
-            }
-            System.out.println();
-        }
-        
+        int maxSnakeLength[][] = new int[a.length][a[0].length];
+        findLargestLengthSnake(a, maxSnakeLength);
     }
 }
