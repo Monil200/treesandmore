@@ -2,12 +2,11 @@ package treessandtrees;
 import java.util.*;
 class Trie {
     boolean isLeaf;
-    char c;
     HashMap<Character, Trie> children = new HashMap<Character, Trie>();
+    char t;
     Trie() {}
-    Trie(char t) {
-        c = t;
-        isLeaf = false;
+    Trie(char temp) {
+        t = temp;
     }
 }
 public class TrieBasic {
@@ -15,86 +14,72 @@ public class TrieBasic {
     TrieBasic() {
         root = new Trie();
     }
+    
     public void insert(String s) {
-        if (s == null || s.length() == 0) {
-            return;
-        }
-        Trie current = null;
-        HashMap<Character, Trie> children = root.children;
-        for(int i=0;i<s.length();i++) {
-            char t = s.charAt(i);
-            if (children.containsKey(t)) {
-                current = children.get(t);
-                children = current.children;
-            } else {
-                current = new Trie(t);
-                children.put(t, current);
-                children = current.children;
-            }
-        }
-        if (current != null)
-            current.isLeaf = true;
         
-    }
-    
-    public void search(String s) {
-        if (s == null || s.length() == 0) {
-            return;
-        }
-        Trie current = root;
-        for(int i=0;i<s.length();i++) {
-            char t = s.charAt(i);
-            HashMap<Character, Trie> children = current.children;
-            if (children.containsKey(t)) {
-                current = children.get(t);
-            } else {
-                System.out.println("String " + s + " not found!!");
-                break;
-            }
-        }
-        if (current.isLeaf)
-            System.out.println("String " + s + " found successfully");
-        else {
-            System.out.println("String " + s + " not found");
-        }
-    }
-    
-    public Trie searchAssistBase(String s) {
-        if (s == null || s.length() == 0) {
-            return null;
-        }
-        Trie current = root;
+        char t;
         HashMap<Character, Trie> children = root.children;
+        Trie node = null;
+        
         for(int i=0;i<s.length();i++) {
-            char t = s.charAt(i);
+            t = s.charAt(i);
             if (children.containsKey(t)) {
-                current = children.get(t);
-                children = current.children;
+                node = children.get(t);
+                children = node.children;
             } else {
-               System.out.println("Base not found, returning null");
-               return current;
+                node = new Trie(t);
+                children.put(t, node);
+                children = node.children;
             }
         }
-        return current;
+        
+        node.isLeaf = true;
     }
     
-    public void searchAssist(Trie node, String s) {
-        if (node == null) {
-            return;
+    public Trie search(String s) {
+        char t;
+        HashMap<Character, Trie> children = root.children;
+        Trie node = null;
+        
+        for(int i=0;i<s.length();i++) {
+            t = s.charAt(i);
+            if (children.containsKey(t)) {
+                node = children.get(t);
+                children = node.children;
+            } else {
+                System.out.println("Not found");
+                return null;
+            }
         }
+        
         if (node.isLeaf) {
+            System.out.println("Full match");
+        } else {
+            System.out.println("partial match");
+        }
+        return node;
+    }
+    
+    public void assist(String s, Trie parent) {
+        if (parent == null)
+            return;
+        if (parent.isLeaf) {
             System.out.println(s);
         }
-        if (node.children.size() == 0)
+        if (parent.children.size() == 0)
             return;
-        HashMap<Character, Trie> children = node.children;
-        Set<Map.Entry<Character, Trie>> iterator = children.entrySet();
-        for(Map.Entry<Character, Trie> i : iterator) {
-            s += i.getKey();
-            Trie temp = i.getValue();
-            searchAssist(temp,s);
-            s = s.substring(0, s.length()-1);
+        
+        HashMap<Character, Trie> children = parent.children;
+        Set<Map.Entry<Character, Trie>> set = children.entrySet();
+        for(Map.Entry<Character, Trie> i : set) {
+            String sCopy = s;
+            s += i.getKey() + "";
+            assist(s, i.getValue());
+            s = sCopy;
         }
+        
+        
+        
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
@@ -105,12 +90,13 @@ public class TrieBasic {
         obj.insert("homebots");
         obj.insert("homeless");
         obj.search("home");
+        obj.search("homeless");
         
         String s = "ho";
-        Trie baseTrieOfAssistString = obj.searchAssistBase(s);
+        Trie baseTrieOfAssistString = obj.search(s);
         if (baseTrieOfAssistString != null) {
-            System.out.println(baseTrieOfAssistString.c + "--" + baseTrieOfAssistString.isLeaf);
-            obj.searchAssist(baseTrieOfAssistString,s);
+            System.out.println(baseTrieOfAssistString.t + "--" + baseTrieOfAssistString.isLeaf);
+            obj.assist(s, baseTrieOfAssistString);
         }
     }
 

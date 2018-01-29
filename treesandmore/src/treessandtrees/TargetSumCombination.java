@@ -30,12 +30,28 @@ public class TargetSumCombination {
         
     }
     
+    public void giveCombinations1(int nums[], int res[], int index) {
+        if (index == nums.length) {
+            System.out.println(Arrays.toString(res));
+            return;
+        }
+        
+        for(int i=index;i<nums.length;i++) {
+            res[i] = nums[i];
+            giveCombinations1(nums,res, i+1);
+            res[i] = -1*nums[i];
+            giveCombinations1(nums,res, i+1);
+        }
+    }
+    
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         TargetSumCombination obj = new TargetSumCombination();
         int nums[] = {1,1,1};
         int res[] = new int[nums.length];
         obj.giveCombinations(nums, res, 0);
+        System.out.println("-----------------");
+        obj.giveCombinations1(nums, res, 0);
     }
 
 }

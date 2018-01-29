@@ -5,7 +5,7 @@ public class NumberOfPallindromes {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         String a[][] = {
-                {"a", "a", "a", "b"},
+                    {"a", "a", "a", "b"},
                     {"b", "a", "a", "a"},
                     {"a", "b", "b", "a"}
                 };
