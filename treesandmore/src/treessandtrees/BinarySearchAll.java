@@ -114,7 +114,7 @@ public class BinarySearchAll {
         int mid = (low+high)/2;
         while(low < high) {
             mid = (low+high)/2;
-            System.out.println("--low - " + low + " Mid - " + mid + "high - " + high);
+            System.out.println("**--low - " + low + " Mid - " + mid + "high - " + high);
             if (a[mid] == target) {
                 return mid;
                 //int[] c = {6,80,90,100, 120};
@@ -145,7 +145,7 @@ public class BinarySearchAll {
         System.out.println("Pivot of rotated array : " + rotatedSortedArrayStart(b, 0, b.length-1));
         
         int[] c = {6,80,90,100, 120};
-        int target3 = 91;
+        int target3 = 1;
         // if target < lowest || target > largest then handle separately
         System.out.println("position to insert new number in sorted array : " + sortedArrayInsertPosition(c, 0, c.length, target3));
     }

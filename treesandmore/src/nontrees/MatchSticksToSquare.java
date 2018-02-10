@@ -36,7 +36,7 @@ public class MatchSticksToSquare {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         MatchSticksToSquare obj = new MatchSticksToSquare();
-        Integer nums[] = {2,2,2,2}, perimeter = 0;
+        Integer nums[] = {5,5,5,5,4,4,4,4,3,3,3,3}, perimeter = 0;
         
         for(int i=0;i<nums.length;i++) {
             perimeter += nums[i];
