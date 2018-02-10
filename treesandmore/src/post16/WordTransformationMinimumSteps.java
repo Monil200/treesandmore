@@ -19,7 +19,7 @@ Return -1;
 import java.io.*;
 import java.util.*;
 
-class Solution {
+public class WordTransformationMinimumSteps {
   
       int minT = 0;
       ArrayList<Integer> countsReached = new ArrayList<Integer>();
@@ -86,7 +86,7 @@ class Solution {
       }
   
   public static void main(String[] args) {
-    Solution obj = new Solution();
+    WordTransformationMinimumSteps obj = new WordTransformationMinimumSteps();
     ArrayList<String> list = new ArrayList<String>();
     list.add("cog");
     list.add("dog");
