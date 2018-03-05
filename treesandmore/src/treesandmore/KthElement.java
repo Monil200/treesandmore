@@ -54,7 +54,7 @@ public class KthElement {
         }
     }
     
-    // other way is to store elements in array and then get kth from aarray
+    // other way is to store elements in array and then get kth from array
     public void findKthElement(Node root, int k) {
         if (root == null ){
             return;

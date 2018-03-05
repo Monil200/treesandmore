@@ -8,7 +8,6 @@ public class MinJumpsToReachArrayEnd {
         int opt[] = new int[a.length];
         opt[0] = 0;
         int jumpCount;
-        boolean didIncrement  = false;
         for(int i=0;i<a.length;i++) {
             int jumpIndex = i+1;
             jumpCount = opt[i] +1;
@@ -22,8 +21,6 @@ public class MinJumpsToReachArrayEnd {
             }
             System.out.println(Arrays.toString(opt) + " val:" + a[i]);
             //jumpCount++;
-          
-            didIncrement = false;
         }
         System.out.println(Arrays.toString(opt));
     }

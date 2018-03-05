@@ -4,8 +4,7 @@ public class MaxDepthOfBST {
     int maxDepth, minDepth;
     Node root;
     MaxDepthOfBST() {
-        root = null;
-        maxDepth =Integer.MIN_VALUE;
+        root = null;        
         minDepth =Integer.MAX_VALUE;
     }
     public void insert(int val) {
@@ -39,11 +38,7 @@ public class MaxDepthOfBST {
             return 0;
         } else {
             int left = getMaxDepth(root.left);
-            int right = getMaxDepth(root.right);
-            int depth = left+right + 1;
-            if (depth > maxDepth) {
-                maxDepth = depth;
-            }
+            int right = getMaxDepth(root.right);                        
             return Math.max(left, right) +1;
         }
     }
@@ -87,7 +82,7 @@ public class MaxDepthOfBST {
         obj.inorder(obj.root);
         
         obj.getMaxDepth(obj.root);
-        System.out.println("Max depth is: " + obj.maxDepth);
+        System.out.println("Max depth is: " + obj.getMaxDepth(obj.root));
         
         
         obj.getMinDepth(obj.root, 1);

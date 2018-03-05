@@ -250,7 +250,7 @@ public class DPBasics {
             opt[i][i] = 1; // 1 = T
         }
         int substring = 0;
-        // need to handle length len2 seperately
+        // need to handle length len2 separately
         
         int row;
         int currMax = 0, maxLen = Integer.MIN_VALUE;

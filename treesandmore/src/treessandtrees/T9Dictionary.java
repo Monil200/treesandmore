@@ -58,12 +58,45 @@ public class T9Dictionary {
         }
     }
     
+    public void getT9Words(String s, int index, int keyStrokes[]) {
+        if (s.length() == keyStrokes.length) {
+            System.out.println(s);
+            return;
+        } else {
+            for(int j=0;j<map.get(index).size();j++) {
+                s += map.get(index).get(j);
+                getT9Words(s, index+1, keyStrokes);
+                s = s.substring(0, s.length()-1);
+            }
+        }
+    }
+    
+    public void generateUrlsV2(ArrayList<String> s, int index) {
+        if (s.size() == urls.size()) {
+            System.out.println(s);
+            return;
+        } else {
+            for(int j=0;j<urls.get(index).size();j++) {
+                s.add(urls.get(index).get(j));
+                generateUrls(s, j+1);
+                s.remove(s.size()-1);
+            }
+        }
+    }
+    
     
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         T9Dictionary obj = new T9Dictionary();
         int keyStrokes[] = {2,3,4};
         obj.possibleStrings(keyStrokes, 0, new ArrayList<Character>());
+        obj.generateUrls(new ArrayList<String>(), 0);
+        
+        // t9 v2
+        System.out.println("V2-------");
+        obj.getT9Words("", keyStrokes[0], keyStrokes);
+        
+        System.out.println("V2------- generate URLs");
         obj.generateUrls(new ArrayList<String>(), 0);
     }
 

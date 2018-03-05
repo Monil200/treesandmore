@@ -28,7 +28,7 @@ public class LRU {
     
     public void modifyHeadOfDLL(String key, int val) {
         if (this.keys.size() > 0 && this.keys.containsKey(key)) {
-            Node current = this.keys.get(key);
+            Node current = keys.get(key);
             Node prev = current.prev;
             Node next = current.next;
             

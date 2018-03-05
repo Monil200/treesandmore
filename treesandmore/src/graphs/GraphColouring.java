@@ -1,12 +1,6 @@
 package graphs;
 import java.util.*;
-class ColoredNodes {
-    int name;
-    int color;
-    public ColoredNodes(int n) {
-        name = n;
-    }
-}
+
 public class GraphColouring {
     int V;
     LinkedList<Integer> adj[];

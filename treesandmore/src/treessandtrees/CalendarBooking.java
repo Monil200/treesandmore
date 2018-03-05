@@ -96,6 +96,7 @@ public class CalendarBooking {
             ClaendarSlot slot = it.next();
             System.out.println("\tSlot start:" + slot.start + " slot end:" + slot.end);
         }
+                
         
     }
     public static void main(String[] args) {

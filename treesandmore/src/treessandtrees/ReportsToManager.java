@@ -53,7 +53,7 @@ public class ReportsToManager {
                 } else {
                     HashSet<String> temp = pmap.get(s.getValue());
                     temp.add(s.getKey());
-                    pmap.put(s.getValue(), temp); // add new emloyee
+                    pmap.put(s.getValue(), temp); // add new employee
                 }
             }
         }

@@ -15,7 +15,7 @@ public class ShuffleDeckOfCards {
         for(int i=0;i<52;i++) {
             int random = (int) (Math.random()*(52-i));
             shuffledDeck.add(a.get(random));
-            a.remove(random);
+            a.remove(random); // instead swap it with last card
         }
         
         Iterator<Cards> it = shuffledDeck.iterator();

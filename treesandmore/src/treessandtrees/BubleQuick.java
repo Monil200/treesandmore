@@ -29,10 +29,10 @@ public class BubleQuick {
     }
     public static void quickSortOnlyK(int[] a, int start, int end, int k, int kth) {
         ++k;
-        System.out.println("k?" + k);
-        if (start < end && k<kth) {
+//        System.out.println("k?" + k);
+        if (start < end && start != k) {
             int x = partition(a,start,end);
-            System.out.println(Arrays.toString(a));
+//            System.out.println(Arrays.toString(a));
             quickSortOnlyK(a,start,x, k, kth);
             quickSortOnlyK(a,x+1,end, k, kth);
         }
@@ -43,14 +43,16 @@ public class BubleQuick {
        int i = start;
        int j = end;
        while(true) {
+           System.out.println("start:" + start + " End: " + end);
            while(a[start] < pivot && start < j) {
                start++;
            }
            while(a[end] > pivot && end > i) {
                end--;
            }
+           System.out.println("\t start:" + start + " End: " + end);
            if (start < end) {
-               System.out.print("Swapping: " + a[start] + " and " + a[end]);
+               System.out.println("Pivot:" + pivot + " Swapping: " + a[start] + " and " + a[end]);
                int temp = a[start];
                a[start] = a[end];
                a[end] = temp;
@@ -62,12 +64,12 @@ public class BubleQuick {
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        int a[] = {311 ,200 ,199, 99, 89, 12, 11};
+        int a[] = {10,9,8,7,6,5};
 //        bubbleSort(a);
-        quickSort(a, 0 , a.length-1);
-        System.out.println(Arrays.toString(a));
-//        quickSortOnlyK(a, 0 , a.length-1, 0, 3);
+//        quickSort(a, 0 , a.length-1);
 //        System.out.println(Arrays.toString(a));
+        quickSortOnlyK(a, 0 , a.length-1, 0, 2);
+        System.out.println(Arrays.toString(a));
     }
 
 }

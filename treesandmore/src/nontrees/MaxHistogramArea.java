@@ -1,47 +1,55 @@
 package nontrees;
 import java.util.Stack;
 public class MaxHistogramArea {
-
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        int a[] = {1,2,2,1};
+    
+    public void getMaxAreaOfHistgram(int a[]) {
+        int maxArea = Integer.MIN_VALUE;
+        int currArea = 0;
+        int top;
         Stack<Integer> s = new Stack<Integer>();
-        int top = -1;
-        int currentArea = 0;
-        int maxArea = 0;
-        s.push(0);
-        top++;
-        for(int i=1;i<a.length;i++) {
-            if (a[i] >= a[s.peek()]) {
+        
+        s.push(0); // put index 0 by default.
+        for(int i=1;i<a.length;i++) { // do something
+            System.out.println(s.toString());
+            if ((s.size() > 0 && a[i] >= a[s.peek()]) || (s.size() == 0)) {
                 s.push(i);
-                top++;
             } else {
-                while(a[s.peek()] > a[i] && s.size() > 0) {
-                    currentArea = a[s.peek()]*(i-top);
-                    s.pop();
-                    top--;
-                    if (currentArea > maxArea) {
-                        maxArea = currentArea;
+                while(s.size() > 0 && a[i] < a[s.peek()]) {
+                    top = s.pop();
+                    if (s.size() > 0) {
+                        currArea = a[top]*(i - s.peek() - 1);
+                    } else {
+                        currArea = a[top]*i;
                     }
-                    currentArea = 0;
+                    if (currArea > maxArea) {
+                        maxArea = currArea;
+                    }
                 }
                 s.push(i);
             }
         }
         
-        // at this point, stack can be non empty. So empty it
-        int i = a.length;
-        while(s.size() > 0) {
-            currentArea = a[s.peek()]*(s.peek() + 1);
-            s.pop();
-            System.out.println(currentArea + "-");
-            if (currentArea > maxArea) {
-                maxArea = currentArea;
+        while (s.size() > 0) {
+            top = s.pop();
+            if (s.size() > 0) {
+                currArea = a[top]*(a.length+1 - s.peek() - 1);
+            } else {
+                currArea = a[top]*a.length+1;
             }
-            currentArea = 0;
+            if (currArea > maxArea) {
+                maxArea = currArea;
+            }
         }
         
-        System.out.println(maxArea);
+        System.out.println("Max histogram area is:" + maxArea);
+        
+    }
+    
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        int a[] = {6,2,5,4,5,1,6};
+        MaxHistogramArea obj = new MaxHistogramArea();
+        obj.getMaxAreaOfHistgram(a);
     }
 
 }

@@ -44,13 +44,48 @@ public class LongestZipZagSubsequence {
         for(int i=0;i<a.length;i++) {
             max = Math.max(max, Math.max(optinc[i], optdec[i]));
         }
-        System.out.println("Max lengt hzig zag is:" + max);
+        System.out.println("Max length zig zag is:" + max);
+    }
+    
+    public void getMaxZigZagSubaequence(int a[]) {
+        
+        int opt[] = new int[a.length];
+        int index = 0;
+        opt[index++] = a[0];
+        opt[index++] = a[1];
+        
+        boolean isHigherValueNeeded = false;
+        if (a[1] > a[0]) {
+            isHigherValueNeeded = false;
+        } else {
+            isHigherValueNeeded = true;
+        }
+        // int a[] = {1,2,4,3,2,6};
+        for(int i=2;i<a.length;i++) {
+            if (a[i] > opt[index-1] && isHigherValueNeeded) {
+                opt[index++] = a[i];
+                isHigherValueNeeded = false;
+            } else if (a[i] < opt[index-1] && !isHigherValueNeeded) {
+                opt[index++] = a[i];
+                isHigherValueNeeded = true;
+            } else if (a[i] > opt[index -1] && !isHigherValueNeeded) {
+                opt[index-1] = a[i];
+            } else if (a[i] < opt[index -1] && isHigherValueNeeded) {
+                opt[index-1] = a[i];
+            }
+        }
+        
+        System.out.println(Arrays.toString(opt));
+        
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         LongestZipZagSubsequence obj = new LongestZipZagSubsequence();
-        int a[] = {1,2,4,3,2,6};
+        int a[] = {1,2,4,3,2,6}; // can be done in O(n)
         obj.getLongestSubsequenceZipZag(a);
+        
+        // v2 in O(n) implementation
+        obj.getMaxZigZagSubaequence(a);
     }
 
 }

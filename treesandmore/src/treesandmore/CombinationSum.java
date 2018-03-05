@@ -12,98 +12,138 @@ import java.util.*;
  */
 public class CombinationSum {
     
-    public static int newMemberToMakeSum(int n, int sumSoFar, int k) {
-        if (n - sumSoFar > k) {
-            return n - sumSoFar;
-        } else {
-            return -1;
+    public void uniQueCombinations(int target, int currSum, int index, ArrayList<Integer> res, int targetSetLimit) {
+        if (res.size() > targetSetLimit) {
+            return;
+        }
+        if (currSum == target && res.size()== targetSetLimit) {
+            System.out.println(res); // unique need to be handled
+            return;
+        }
+        if (currSum > target || index > 9) {
+            return;
+        }
+        for(int i=index;i<=9;i++) {
+            currSum += i;
+            res.add(i);
+            uniQueCombinations(target, currSum, i+1, res,targetSetLimit);
+            currSum -= i;
+            res.remove(res.size()-1);
         }
     }
+    
+    public void getCombinationSumV2(int a[], int currSum, int index, ArrayList<Integer> res, int target) {
+        if (currSum == target && res.size() <= a.length) {
+            System.out.println(res);
+        }
+        if (index >= a.length) {
+            return;
+        }
+        if (currSum > target) {
+            return;
+        }
+        for(int i=0;i<a.length;i++) {
+            currSum += a[i];
+            res.add(a[i]);
+            getCombinationSumV2(a, currSum, i+1, res, target);
+            currSum -= a[i];
+            res.remove(res.size() -1);
+        }
+    }
+    
+    public void getRepeatedCombinations(int target, int currSum, ArrayList<Integer> res) {
+        if (target == currSum) {
+            System.out.println(res);
+            return;
+        } else {
+            for(int i=1;i<=target;i++) {
+                if ((currSum + i) <= target) {
+                    currSum += i;
+                    res.add(i);
+                    getRepeatedCombinations(target, currSum, res);
+                    currSum -= i;
+                    res.remove(res.size()-1);
+                }
+            }
+        }
+    }
+    
+    public void getToTargetWithUniqueSet(int target, int currSum, ArrayList<Integer> res, int index) {
+        if (currSum == target) {
+            System.out.println(res);
+            return;
+        } else {
+            for(int i=index;i<target;i++) {
+                if ((currSum + i) <= target) {
+                    currSum += i;
+                    res.add(i);
+                    getToTargetWithUniqueSet(target, currSum, res,i+1);
+                    currSum -= i;
+                    res.remove(res.size()-1);
+                }
+            }
+        }
+    }
+    
+    public void getToTargetWithUniqueCombinationsInputARrayGiven(int a[], int index, int target, int currSum, ArrayList<Integer> res) {
+        if (currSum == target) {
+            System.out.println(res);
+            return;
+        } else {
+            if (index >= a.length) {
+                return;
+            } else {
+                for(int i=index;i<a.length;i++) {
+                    if ((currSum + a[i]) <= target) {
+                        currSum += a[i];
+                        res.add(a[i]);
+                        getToTargetWithUniqueCombinationsInputARrayGiven(a, i+1, target, currSum, res);
+                        currSum -= a[i];
+                        res.remove(res.size() -1);
+                    }
+                }
+            }
+        }
+    }
+   
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         int n=9, k=3;
-//        Integer a[] = new Integer[k];
-//        int initialSum = 0;
-//        for (int i=0;i<k;i++) {
-//            a[i] = 1+i;
-//            initialSum += a[i];
-//        }
-//        System.out.println(initialSum);
-//        
-//        for (int i=0;i<k;i++) {
-//            int newMember = newMemberToMakeSum(n, initialSum - a[i], k); 
-//            if (newMember >= 0) {
-//                System.out.print("[");
-//                for (int j=0; j<k; j++) {
-//                    if (j != i) {
-//                        System.out.print(a[j] + " , ");
-//                    }
-//                }
-//                System.out.println(newMember + "]");
-//            }
-//        }
-        Integer num[] = new Integer[k];
-        //findUniqueCombinations(k, 9, num, 0);
-        System.out.println("New-----------");
-        HashSet<List<Integer>> res = new HashSet<List<Integer>>();
-        newCombinationSum(k, 9, num, 0, res);
-        System.out.println(res.size());
+        CombinationSum obj = new CombinationSum();
+        obj.uniQueCombinations(n, 0, 1, new ArrayList<Integer>(), k);
         
-    }
-    
-    public static void newCombinationSum(int k, int sumToGet, Integer num[], int start, HashSet<List<Integer>> res) {
-        if (start >= k) {
-            return;
-        }
-        for(int i=start;i<k;i++) {
-            for(int j=1;j<=9;j++) {
-                num[i] = j;
-                if (i == k-1) {
-                    isUnique(num, sumToGet ,res);
-                }
-                newCombinationSum(k, sumToGet, num, i+1, res);
-                num[i] = 0;
-            }
-        }
-    }
-    
-    public static void isUnique(Integer num[], int sumToGet, HashSet<List<Integer>> res) {
-        int sum = 0;
-        boolean isZeroFound = false;
-        for(int i=0;i<num.length;i++) {
-            if (num[i] == 0) {
-                sum += num[i];
-                isZeroFound = true;
-                break;
-            } else {
-                sum += num[i];
-            }
-        }
-        if (!isZeroFound && sum == sumToGet) {
-            List<Integer> temp = new ArrayList<Integer>();
-            for(int i=0;i<num.length;i++)
-                temp.add(num[i]);
-            Collections.sort(temp);
-            System.out.println(Arrays.asList(temp));
-            System.out.println(res.add(temp));
-        }
-    }
-    // using combination method
-    
-    public static void findUniqueCombinations(int k, int sumToGet, int num[], int start) {
-        for(int i=start;i<k;i++) {
-            for(int j=1;j<=9;j++) {
-                num[i] = j;
-                if (start == k-1) {
-                    // could do it based on k values...currently hardcoded k to 3 here
-                    if (num[0] + num[1] + num[2] == sumToGet && num[0] != num[1] && num[1] != num[2] && num[0] < num[1] && num[1] < num[2]) {
-                        System.out.println(Arrays.toString(num));
-                    }
-                }
-                findUniqueCombinations(k,sumToGet, num, i+1);
-                num[i] = 1;
-            }
-        }
-    }
+        // other variation
+        /*
+         * Given a set of candidate numbers (C) (without duplicates) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.
 
+The same repeated number may be chosen from C unlimited number of times.
+
+Note:
+All numbers (including target) will be positive integers.
+The solution set must not contain duplicate combinations.
+For example, given candidate set [2, 3, 6, 7] and target 7, 
+A solution set is: 
+[
+  [7],
+  [2, 2, 3]
+]
+         */
+        // v2 start
+        System.out.println("--------------v2-------------");
+        int arr[] = {2, 3, 6, 7, 7};
+        int target = 7;
+        obj.getCombinationSumV2(arr, 0, 0, new ArrayList<Integer>(), target);
+        
+        
+        // new 2 types
+        // type 1- get to target with repetitions
+        System.out.println("--------------type 1- get to target with repetitions-------------");
+        obj.getRepeatedCombinations(9, 0, new ArrayList<Integer>());
+        System.out.println("--------------type 2- get to target without repetitions-------------");
+        obj.getToTargetWithUniqueSet(9, 0, new ArrayList<Integer>(), 1);
+        System.out.println("--------------type 3- get to target without repetitions from given array-------------");       
+        obj.getToTargetWithUniqueCombinationsInputARrayGiven(arr, 0,9,0,new ArrayList<Integer>());
+    }
+    
+    
 }
