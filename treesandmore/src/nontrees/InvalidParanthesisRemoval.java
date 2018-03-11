@@ -41,7 +41,7 @@ public class InvalidParanthesisRemoval {
             String temp = "";
             for(int i=0;i<popped.length();i++) {
                 temp = popped.substring(0, i) + popped.substring(i+1, popped.length());
-                if (!visited.contains(temp)) {
+                if (!visited.contains(temp) && temp.length() == s.length()-1) {
                     q.add(temp);
                     visited.add(temp);
                 }

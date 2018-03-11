@@ -22,6 +22,31 @@ public class ReverseLLVariations {
         }
     }
     
+    public int addOne(ListNode head) {
+        if (head == null) {
+            return 0;
+        } else {
+            if (head.next == null) {
+                if (head.data + 1 > 9 ) {
+                    head.data = (head.data + 1)%10;
+                    return (int) (head.data + 1)%9; 
+                } else {
+                    head.data = (head.data + 1);
+                    return 0;
+                }
+            } else {
+                int ret = addOne(head.next);
+                if (head.data + ret > 9 ) {
+                    head.data = (head.data + ret)%10;
+                    return (int) (head.data + ret)%9; 
+                } else {
+                    head.data = (head.data + ret);
+                    return 0;
+                }
+            }
+        }
+    }
+    
     public void reverseLL(ListNode head1) {
         if (head1 == null || head1.next == null)
             return;
@@ -108,6 +133,20 @@ public class ReverseLLVariations {
         System.out.println();
         obj.reverseLLFromStartEnd(obj.head,2,5);
         obj.showLL(obj.head);
+        
+        ReverseLLVariations obj1 = new ReverseLLVariations();
+        obj1.insert(9);
+        obj1.insert(8);
+        obj1.insert(1);
+        
+        obj1.addOne(obj1.head);
+        ListNode current1 = obj1.head;
+        System.out.println("Add one to LL");
+        while(current1!=null) {
+            System.out.print(current1.data + ", ");
+            current1 = current1.next;
+        }
+        
         
     }
 
