@@ -4,98 +4,73 @@ package treessandtrees;
  * For each call to the method MyCalendar.book, return true if the event can be added to the calendar successfully without causing a triple booking. Otherwise, return false and do not add the event to the calendar.
  */
 import java.util.*;
-class ClaendarSlot {
+class CalendarSlot {
     int start,end, conflicts;
-    ClaendarSlot(int s, int e) {
+    CalendarSlot(int s, int e) {
         start = s;
         end = e;
         conflicts = 0;
     }
 }
 public class CalendarBooking {
-    TreeSet<ClaendarSlot> pq;
+    PriorityQueue<CalendarSlot> pq;
+    PriorityQueue<CalendarSlot> pqHolder;
     CalendarBooking() {
-        pq = new TreeSet<ClaendarSlot>(
-                new Comparator<ClaendarSlot>() {
-                    public int compare(ClaendarSlot a, ClaendarSlot b) {
-                        if (a.start != b.start)
-                            return a.start - b.start;
-                        else 
-                            return b.end - a.end;
+        pq = new PriorityQueue<CalendarSlot>(
+                new Comparator<CalendarSlot>() {
+                    public int compare(CalendarSlot a, CalendarSlot b) {
+                        return a.end - b.end;
                     }
                 }
         );
+        pqHolder = new PriorityQueue<CalendarSlot>(
+                new Comparator<CalendarSlot>() {
+                    public int compare(CalendarSlot a, CalendarSlot b) {
+                        return a.end - b.end;
+                    }
+                }
+        ); 
     }
     public void fillcalendar(int start, int end) {
         if (pq.size() == 0) {
-            System.out.println("First slot added successfully");
-            pq.add(new ClaendarSlot(start, end));
-            return;
-        }
-        Iterator<ClaendarSlot> it = pq.iterator();
-        ClaendarSlot current = null;
-        ClaendarSlot prev = null;
-        boolean isSlotAdded = false;
-        Stack<ClaendarSlot> stack = new Stack<ClaendarSlot>();
-        while(it.hasNext()) {
-            current = it.next();
-//            System.out.println("current start" + current.start + " current end:" + current.end + " new start:" + start + " new end" + end);
-            if (current.start >= end && ((prev != null && prev.end <= start) || prev == null)) { // Beginning of current slot
-                System.out.println("adding in first if ");
-                pq.add(new ClaendarSlot(start ,end));
-                isSlotAdded = true;
-                break;
-            }
-            if (current.start < end) {
-                if (stack.size() > 0 && stack.peek().end > start) {
-                    Stack<ClaendarSlot> temp = new Stack<ClaendarSlot>();
-                    boolean isBadAdd = false;
-                    while(stack.size() > 0 && !isBadAdd)  {
-                        if (stack.peek().end > start && stack.peek().conflicts == 1) {
-                            isBadAdd = true;
-                            break;
-                        } else if (stack.peek().end > start && stack.peek().conflicts == 1) {
-                            temp.push(stack.pop());
-                        }
-                    }
-                    // add back from temp to stack
-                    while(temp.size() > 0) {
-                        stack.push(temp.pop());
-                    }
-                    if (isBadAdd) {
-                        System.out.println("Cannot be added to calendar");
-                    } else {
-                        current.conflicts = 1;
-                        pq.add(new ClaendarSlot(start ,end));
-                    }
-                } else {
-                    current.conflicts = 1;
-                    pq.add(new ClaendarSlot(start ,end));
+            pq.add(new CalendarSlot(start,end));
+            System.out.println("Adeed first entry - No conflicts");
+        } else {
+            CalendarSlot prev = null;
+            CalendarSlot current = new CalendarSlot(start, end);
+            
+            while(pq.size() > 0) {
+                prev = pq.poll();
+                pqHolder.add(prev);
+                System.out.println("prev start:" + prev.start + " prev end:" + prev.end + " curr start:" + current.start + " curr end:" + current.end);
+                if (prev.start >= current.end) {
+                    break;
+                } else if ((current.end > prev.start && current.end <= prev.end) || 
+                           (current.start>= prev.start && current.end<=prev.end) ||
+                           (current.start < prev.end && current.end > prev.end) ||
+                           (current.start < prev.start && current.end > prev.end)) {
+                    prev.conflicts++;
+                    current.conflicts++;
+                } else if (prev.end >= current.start) {
+                    prev = pq.poll();
                 }
             }
-
-            stack.push(current);
-            prev = current;
             
+            if (pqHolder != null && pqHolder.size() > 0) {
+                    pq.addAll(pqHolder);
+            }
+            pq.add(current);
+            pqHolder.clear();
+            
+            while(pq.size() > 0) {
+                CalendarSlot temp = pq.poll();
+                pqHolder.add(temp);
+                System.out.println("\t Start:" + temp.start + " end:" + temp.end + " conflicts:" + temp.conflicts);
+            }
+            pq.addAll(pqHolder);
+            pqHolder.clear();
         }
         
-        // check if it can be appended at end
-        if (pq.last().end <= start) {
-            System.out.println("adding last slot ");
-            pq.add(new ClaendarSlot(start ,end));
-            isSlotAdded = true;
-        }
-        
-        it = pq.iterator(); // no guarantee of order
-        if (isSlotAdded) {
-            System.out.println("Slot added:");
-        } else {
-            System.out.println("Conflict:");
-        }
-        while(it.hasNext()) {
-            ClaendarSlot slot = it.next();
-            System.out.println("\tSlot start:" + slot.start + " slot end:" + slot.end);
-        }
                 
         
     }
@@ -103,8 +78,15 @@ public class CalendarBooking {
         // TODO Auto-generated method stub
         CalendarBooking obj = new CalendarBooking();
         obj.fillcalendar(10, 15);
+        System.out.println();
         obj.fillcalendar(15, 25);
-        obj.fillcalendar(20, 30);
+        System.out.println();
+        obj.fillcalendar(14, 30);
+        System.out.println();
+        obj.fillcalendar(24, 35);
+        System.out.println();
+        obj.fillcalendar(23, 36);
+        System.out.println();
         obj.fillcalendar(5, 6);
     }
 

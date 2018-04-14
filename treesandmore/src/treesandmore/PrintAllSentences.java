@@ -17,7 +17,7 @@ public class PrintAllSentences {
         }
     }
     
-    public static void printCombinations(int start, char[] output, String s) {
+    public static void printPermutations(int start, char[] output, String s) {
         if (start == s.length()) {
             System.out.println(Arrays.toString(output));
         } else {
@@ -27,7 +27,7 @@ public class PrintAllSentences {
                 temp[start] = temp[i];
                 temp[i] = t;
                 s = String.valueOf(temp);
-                printCombinations(start+1, temp,s);
+                printPermutations(start+1, temp,s);
             }
         }
     }
@@ -52,7 +52,7 @@ public class PrintAllSentences {
         String output[] = new String[a.length];
         printSentence(0, output);
         char o[] = {};
-        printCombinations(0, o, "ABC");
+        printPermutations(0, o, "ABC");
         
         //t9
         keys.put(2, "abc");

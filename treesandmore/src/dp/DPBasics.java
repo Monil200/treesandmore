@@ -6,7 +6,7 @@ public class DPBasics {
     
     
     // longest increasing subsequence
-    public void getLCS(int a[]) {
+    public void getLIS(int a[]) {
         int opt[] = new int[a.length];
         opt[0] = 1;
         for(int i=1;i<a.length;i++) {
@@ -385,7 +385,7 @@ public class DPBasics {
         // LCS
         int a[] = {2,6,8,4,0,5,11,19,15};
         DPBasics obj = new DPBasics();
-        obj.getLCS(a);
+        obj.getLIS(a);
         
         // max product subarray
         int b[] = {3,-9, 1, 2, 1, -8, -3};

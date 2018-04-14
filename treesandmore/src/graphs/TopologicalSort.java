@@ -17,7 +17,7 @@ public class TopologicalSort {
         adj[u].add(v);
     }
     
-    public void topologicalSortUtil(int visited[], int start) {
+    public void topologicalSortUtil(int visited[], int start) { // this is only because there is no cycle in graph
         visited[start] =1;
         Iterator<Integer> it = adj[start].iterator();
         while(it.hasNext()) {

@@ -3,7 +3,7 @@ import java.util.*;
 public class PermutationsAndT9 {
     
     public static void permutationsOfAString(String str, int s, int e) {
-        if (s == e) {
+        if (s == e-1) {
             System.out.println(str);
         } else {
             for(int i=s;i<str.length();i++) {
@@ -64,7 +64,7 @@ public class PermutationsAndT9 {
     
     public static void main(String[] args) {
         // permutations of a string n!
-        permutationsOfAString("abcd", 0, "abcd".length());
+        permutationsOfAString("123", 0, "abcd".length());
         
         //permute strings in arrays -> n!
         list1.add("eat");list1.add("sleep");

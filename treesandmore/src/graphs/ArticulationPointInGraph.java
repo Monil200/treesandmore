@@ -48,14 +48,8 @@ public class ArticulationPointInGraph {
             APFound = allVisited(visited);
             if (APFound)
                 System.out.println("AP is : " + i);
-            cleanVisited(visited);
+            Arrays.fill(visited, 0);
             addNodeBack();
-        }
-    }
-    
-    void cleanVisited(int[] visited) {
-        for(int i=0;i<V;i++) {
-            visited[i] = 0;
         }
     }
     

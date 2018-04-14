@@ -102,6 +102,7 @@ public class BinaryTreeGlassFill {
             fillNodesTimeCalculate(root.right, rate, unitsOfWater/2, level);
         }
     }
+
     
     public static void main(String[] args) {
         // TODO Auto-generated method stub

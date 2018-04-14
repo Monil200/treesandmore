@@ -21,6 +21,7 @@ public class MaxHistogramArea {
                     } else {
                         currArea = a[top]*i;
                     }
+                    System.out.println("\t currArea:" + currArea + " max:" + maxArea);
                     if (currArea > maxArea) {
                         maxArea = currArea;
                     }

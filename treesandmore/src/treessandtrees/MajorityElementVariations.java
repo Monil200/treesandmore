@@ -28,7 +28,7 @@ public class MajorityElementVariations {
         int count1=1,count2 = 0;
         int element1=a[0],element2 = a[0];// cancel each other
         
-        for(int i=0;i<a.length;i++) {
+        for(int i=1;i<a.length;i++) {
             if (a[i] == element1) {
                 count1++;
             } else if (a[i] == element2) {
@@ -69,7 +69,7 @@ public class MajorityElementVariations {
         int a[] = {2,1,3};
         obj.getMajority(a);
         
-        int b[] = {1,2,3,1};
+        int b[] = {1,2,3,1,3};
         obj.getMajorityElementOneThird(b);
     }
 }
