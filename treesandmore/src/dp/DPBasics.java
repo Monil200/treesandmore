@@ -25,19 +25,37 @@ public class DPBasics {
     }
     
     public void getMaxProductSubarray(int a[]) {
-        int product = 1;
         int maxProduct = 1;
+        int prodAll[] = new int[a.length];
+        int currMax[] = new int[a.length]; // subarray which is positive only
         
-        for(int i=0;i<a.length;i++) {
-            if (a[i]!= 0) {
-                product *= a[i];
-                if (product > maxProduct) {
-                    maxProduct = product;
+        prodAll[0] = a[0] == 0 ? 1 : a[0];
+        currMax[0] = a[0] > 0 ? a[0] : 1;
+        
+        if (currMax[0] > 0 || prodAll[0] > 0) {
+            maxProduct = Math.max(currMax[0], prodAll[0]); 
+        }
+        
+        for(int i=1;i<a.length;i++) {
+            if (a[i] == 0) {
+                prodAll[i] = 1;
+                currMax[i] = 1;
+            } else if (a[i] > 0) {
+                prodAll[i] = prodAll[i-1] * a[i];
+                currMax[i] = currMax[i-1] * a[i];
+                if (maxProduct < currMax[i] || maxProduct < prodAll[i]) {
+                    maxProduct = Math.max(currMax[i], prodAll[i]);
                 }
-            } else {
-                product = 1;
+            } else { // negative num
+                prodAll[i] = prodAll[i-1] * a[i];
+                currMax[i] = 1;
+                if (maxProduct < prodAll[i]) {
+                    maxProduct = prodAll[i];
+                }
             }
         }
+        
+        
         
         System.out.println("Max product is:" + maxProduct);
     }
@@ -388,7 +406,7 @@ public class DPBasics {
         obj.getLIS(a);
         
         // max product subarray
-        int b[] = {3,-9, 1, 2, 1, -8, -3};
+        int b[] = {3,-9, 2, 2,1,-8,-3};
         obj.getMaxProductSubarray(b);
         
         // rod cut

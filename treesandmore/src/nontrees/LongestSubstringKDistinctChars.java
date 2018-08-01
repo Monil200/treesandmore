@@ -102,7 +102,7 @@ public class LongestSubstringKDistinctChars {
             maxLength = s.length();
         }
         
-        System.out.println("Max length substring without repeating chars:" + maxLength);
+        System.out.println("Max length substring without repeating chars:" + maxLength + " String:" + s);
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
@@ -110,7 +110,7 @@ public class LongestSubstringKDistinctChars {
         LongestSubstringKDistinctChars obj = new LongestSubstringKDistinctChars();
         obj.getLongestSubstringWithKDistingChars("abbxzbbzaz", 2);
         
-        obj.getLongestSubstringWithKDistinctCharsV2("abcdefgh", 2);
+        obj.getLongestSubstringWithKDistinctCharsV2("abbxzbbzaz", 2);
         
         // longest substring without repeating chars.
         obj.longestSubstringWithoutRepeatingChars("abcdcdh");

@@ -30,27 +30,29 @@ public class OneThreeTwoCheck {
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        int a[] = {1,3,3, 9};
-        
-        int min = Integer.MAX_VALUE;
-        int max = a[0];
-        int mid = -1;
+        int a[] = {3, 6,9,7};
+        int one = Integer.MAX_VALUE;
+        int three=-1, two = -1;
         
         for(int i=0;i<a.length;i++) {
-            if (a[i] < min) {
-                min = a[i];
-            } else if (a[i] >= max) {
-                max = a[i]; 
-            } else {
-                mid = a[i];
+            if (a[i] < one) {
+                one = a[i];
+            } else if (a[i] > three) {
+                three = a[i];
+            } else if (a[i] > one && a[i] < three) {
+                two = a[i];
                 break;
             }
         }
-        if (mid == -1) {
-            System.out.println("no 132"); 
+        
+        System.out.println(one + "" + three + "" + two);
+        if (two == -1) {
+            System.out.println("No 132");
         } else {
-            System.out.println("132 success");
+            System.out.println("Success");
         }
+        
+        
         // dp problem
         System.out.println(findSubstringInWraproundString("abcdbcd"));
     }

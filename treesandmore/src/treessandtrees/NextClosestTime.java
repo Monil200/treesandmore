@@ -1,6 +1,6 @@
 package treessandtrees;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class NextClosestTime {
     int currDiff, minDiff;
@@ -65,23 +65,98 @@ public class NextClosestTime {
         
     }
     
+    public void nextCLosesTimeV2(String time) {
+        if (time == null || time.length() == 0) {
+            return;
+        }
+        
+        String arr[] = time.split(":");
+        int hh = Integer.parseInt(arr[0]);
+        int mm = Integer.parseInt(arr[1]);
+        
+        
+        int rotatedHH = hh, rotatedMM = mm;
+        int diff = Integer.MAX_VALUE;
+        int currDiff = 0;
+        boolean run = true;
+        System.out.println("Out Loop HH:" + rotatedHH + " MM:" + rotatedMM);
+        int count = 0;
+        while(count < 1439) {
+            rotatedMM++;
+            count++;
+            if (rotatedMM == 60) {
+                rotatedMM = 0;
+                rotatedHH++;
+                if (rotatedHH == 24) {
+                    rotatedHH = 0;
+                }
+            }
+            System.out.println("Loop HH:" + rotatedHH + " MM:" + rotatedMM + " HH og:" + hh + " mm og:" + mm);
+            if (isSameDigitsInTime(rotatedHH, rotatedMM, time)) {
+                if (rotatedHH > hh) {
+                    currDiff += 60*(rotatedHH - hh);
+                } else if (rotatedHH < hh) {
+                    currDiff += 60*(24 - hh) + 60*rotatedHH;
+                }
+                if (rotatedMM > mm) {
+                    currDiff += rotatedMM - mm;
+                } else if (rotatedMM < mm) {
+                    currDiff -= (mm - rotatedMM);  
+                }
+                if (currDiff < diff) {
+                    diff = currDiff;
+                    System.out.println("Candidate HH:" + rotatedHH + " MM:" + rotatedMM);
+                }
+            }
+        }
+        
+        System.out.println("SMallest diff:" + diff);
+    }
+    
+    public boolean isSameDigitsInTime(int hh, int mm, String time) {
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
+        for(int i=0;i<time.length();i++) {
+            if (time.charAt(i) != ':') {
+                map.put(time.charAt(i)+"", map.getOrDefault(map.get(time.charAt(i)),1));
+            }
+        }
+        String hhString = String.valueOf(hh);
+        String mmString = String.valueOf(mm);
+        
+        for(int i=0;i<hhString.length();i++) {
+            String t = hhString.charAt(i) + "";
+            if (!map.containsKey(t)) {
+                return false;
+            }
+        }
+        for(int i=0;i<mmString.length();i++) {
+            String t = mmString.charAt(i) + "";
+            if (!map.containsKey(t)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         NextClosestTime obj = new NextClosestTime();
-        String time = "23:59";
-        String timeNumsStr[] = time.split(":");
-        int timeNums[] = new int[4];
-        int res[] = new int[4];
-        timeNums[0] = Integer.parseInt(timeNumsStr[0])/10;
-        timeNums[1] = Integer.parseInt(timeNumsStr[0])%10;
+        String time = "19:34";
+//        String timeNumsStr[] = time.split(":");
+//        int timeNums[] = new int[4];
+//        int res[] = new int[4];
+//        timeNums[0] = Integer.parseInt(timeNumsStr[0])/10;
+//        timeNums[1] = Integer.parseInt(timeNumsStr[0])%10;
+//        
+//        timeNums[2] = Integer.parseInt(timeNumsStr[1])/10;
+//        timeNums[3] = Integer.parseInt(timeNumsStr[1])%10;
+//        
+//        System.out.println(Arrays.toString(timeNums));
+//        
+//        obj.getTimeCombinations(timeNums, res, 0);
+//        System.out.println("Smallest diff is:" + obj.minDiff + " time is: " + Arrays.toString(obj.closestTime));
         
-        timeNums[2] = Integer.parseInt(timeNumsStr[1])/10;
-        timeNums[3] = Integer.parseInt(timeNumsStr[1])%10;
-        
-        System.out.println(Arrays.toString(timeNums));
-        
-        obj.getTimeCombinations(timeNums, res, 0);
-        System.out.println("Smallest diff is:" + obj.minDiff + " time is: " + Arrays.toString(obj.closestTime));
+        obj.nextCLosesTimeV2(time);
     }
 
 }

@@ -29,7 +29,7 @@ public class CyclesInGraphVariations {
             while(it.hasNext()) {
                 int neighbour = it.next();
                 if (parent != -1 && neighbour != parent) {
-                    if (visited[neighbour]) {
+                    if (callstack[neighbour]) {
                         System.out.println("Cycle detected in undirected graph at node" + neighbour);
                     }
                 }
